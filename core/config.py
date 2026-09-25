@@ -135,6 +135,14 @@ class ConfigManager:
     def temperature(self) -> float:
         return float(self.get("llm.temperature", 0.7))
 
+    @property
+    def max_context_tokens(self) -> int:
+        return int(self.get("llm.max_context_tokens", 3500))
+
+    @property
+    def default_language(self) -> str:
+        return str(self.get("assistant.default_language", "en"))
+
     # Automation settings
     @property
     def confirmation_required(self) -> bool:

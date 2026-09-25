@@ -18,6 +18,7 @@ DOCS_DIR = PROJECT_ROOT / "docs"
 # Data Subdirectories
 LOGS_DIR = DATA_DIR / "logs"
 CONVERSATION_HISTORY_DIR = DATA_DIR / "conversation_history"
+CONVERSATIONS_DIR = CONVERSATION_HISTORY_DIR  # alias used by chatbot module
 STEERING_PRESETS_DIR = DATA_DIR / "steering_presets"
 
 # Default Configuration Filepaths
