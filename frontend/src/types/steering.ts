@@ -1,54 +1,26 @@
-// Activation Steering & Mechanistic Interpretability Types
+export interface SteeringStatus {
+  active: boolean;
+  preset: string | null;
+  alpha: number | null;
+  layer: number | null;
+  vector_norm: number | null;
+}
 
-export type SteeringPreset = 'neutral' | 'cautious' | 'concise' | 'detailed' | 'creative';
-
-export interface SteeringDirection {
-  id: string;
-  label: string;
+export interface Preset {
+  name: string;
   description: string;
-  layerIndex: number;
-  strength: number;       // Range: -3.0 to +3.0
-  isActive: boolean;
-  category?: 'style' | 'safety' | 'reasoning' | 'custom';
+  default_alpha: number;
+  target_layer: number | null;
 }
 
-export interface LayerActivation {
-  layerIndex: number;
-  meanActivation: number;
-  maxActivation: number;
-  activations: number[];  // Per-token activation norms
-}
-
-export interface SteeringSession {
-  preset: SteeringPreset;
-  directions: SteeringDirection[];
-  layerActivations: LayerActivation[];
-  modelName: string;
-  totalLayers: number;
-}
-
-// Side-by-Side Comparison Lab Types
-export interface SteeringComparisonResult {
-  prompt: string;
-  unsteeredOutput: string;
-  steeredOutput: string;
-  preset: SteeringPreset;
-  appliedDirection: string;
-  strength: number;
-  targetLayer: number;
+export interface CompareResult {
+  unsteered: string;
+  steered: string;
   metrics: {
-    unsteeredTokens: number;
-    steeredTokens: number;
-    tokenDeltaPercentage: number;
-    latencyMs: number;
-    estimatedPerplexityDelta?: number;
+    unsteered_tokens: number;
+    steered_tokens: number;
+    token_delta_percentage: number;
+    unsteered_latency_ms: number;
+    steered_latency_ms: number;
   };
-}
-
-export interface BenchmarkPrompt {
-  id: string;
-  category: 'automation' | 'technical' | 'conversational';
-  prompt: string;
-  recommendedPreset: SteeringPreset;
-  expectedBehavior: string;
 }
