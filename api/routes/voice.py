@@ -1,6 +1,29 @@
-# Voice REST API routes
-# GET  /api/voice/status          - Get voice system status (listening/idle)
-# POST /api/voice/start           - Start wake word listener
-# POST /api/voice/stop            - Stop wake word listener
-# GET  /api/voice/languages       - Get supported languages
-# POST /api/voice/language        - Set active language
+"""
+Voice REST API routes for Sephora.
+Provides voice pipeline status and configuration.
+"""
+
+from fastapi import APIRouter
+
+router = APIRouter(prefix="/api/voice", tags=["Voice"])
+
+_voice_pipeline = None
+
+
+def init(voice_pipeline=None):
+    """Wire up voice pipeline."""
+    global _voice_pipeline
+    _voice_pipeline = voice_pipeline
+
+
+@router.get("/status")
+async def voice_status():
+    """Check voice pipeline readiness."""
+    if _voice_pipeline is None:
+        return {"available": False, "message": "Voice pipeline not initialized."}
+    return {
+        "available": True,
+        "ready": _voice_pipeline.is_ready,
+        "model_size": _voice_pipeline.transcriber.model_size,
+        "model_loaded": _voice_pipeline.transcriber.is_loaded,
+    }

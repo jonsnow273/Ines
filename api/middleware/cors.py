@@ -1,4 +1,22 @@
-# CORS middleware configuration for FastAPI
-# Allows the React dev server (localhost:5173) to communicate
-# with the FastAPI backend (localhost:8000) during development.
-# In production, FastAPI serves the built React static files directly.
+"""
+CORS middleware configuration for Sephora API.
+Allows the React frontend (localhost:5173) to connect.
+"""
+
+from fastapi.middleware.cors import CORSMiddleware
+
+
+def add_cors(app):
+    """Add CORS middleware to the FastAPI app."""
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[
+            "http://localhost:5173",   # Vite dev server
+            "http://localhost:3000",   # Alternative React port
+            "http://127.0.0.1:5173",
+            "http://127.0.0.1:3000",
+        ],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )

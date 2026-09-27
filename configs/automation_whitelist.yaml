@@ -1,37 +1,61 @@
+# =============================================================
 # Sephora - Automation Whitelist
-# Only these actions can be executed by the automation agent.
+# Controls which PC actions Sephora is allowed to execute.
+# Each category can be enabled/disabled independently.
+# Actions not in the "allowed" list are blocked by default.
+# =============================================================
 
-actions:
-  file_management:
+file_operations:
+  enabled: true
+  allowed:
+    - open
+    - read
+    - list
+    - search
     - create_file
     - create_folder
-    - delete_file          # DESTRUCTIVE - requires confirmation
-    - delete_folder        # DESTRUCTIVE - requires confirmation
-    - rename_file
-    - rename_folder
     - copy_file
-    - move_file
+    - rename
+  blocked:
+    - delete
+    - format
+    - overwrite
 
-  application_control:
-    - open_application
-    - open_url_in_browser
-
-  file_search:
-    - search_files_by_name
-    - search_files_by_extension
-    - search_files_by_content
-
-  media:
-    - play_audio_file
-    - open_media_player
-
-  code:
-    - write_code_to_file
+application_control:
+  enabled: true
+  allowed:
+    - open_app
+    - close_app
+    - switch_app
     - open_in_vscode
+  blocked:
+    - install
+    - uninstall
+
+system_commands:
+  enabled: false
+  allowed: []
+  blocked:
+    - shutdown
+    - restart
+    - registry_edit
+    - disk_format
+
+web_actions:
+  enabled: true
+  allowed:
+    - open_url
+    - search_web
+  blocked:
+    - download_file
+    - execute_script
 
 # Actions that ALWAYS require explicit user confirmation
 destructive_actions:
-  - delete_file
-  - delete_folder
-  - rename_file
-  - rename_folder
+  - delete
+  - overwrite
+  - move
+  - rename
+  - close_app
+  - uninstall
+  - kill_process
