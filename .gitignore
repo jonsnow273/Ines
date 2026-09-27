@@ -98,3 +98,12 @@ wake_word_data/
 # OS
 ehthumbs.db
 *.lnk
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+.npm/
+.vite/
+frontend/dist/
+frontend/dist-ssr/
+*.local
