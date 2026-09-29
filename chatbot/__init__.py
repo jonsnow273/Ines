@@ -1,5 +1,5 @@
 """
-Chatbot module — Conversation management for Sephora.
+Chatbot module — Conversation management for Ines.
 
 Provides:
 - ConversationHistory: per-session message storage with auto-save

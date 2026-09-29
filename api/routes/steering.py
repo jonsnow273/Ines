@@ -1,5 +1,5 @@
 """
-Steering REST API routes for Sephora.
+Steering REST API routes for Ines.
 Controls activation steering presets, alpha values, and comparison runs.
 """
 

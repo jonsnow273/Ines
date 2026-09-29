@@ -1,6 +1,6 @@
 # 📊 Experimental Benchmarks & Evaluation Protocols
 
-This document specifies the experimental setup, benchmark datasets, evaluation protocols, and ablation findings used to validate activation steering in Sephora.
+This document specifies the experimental setup, benchmark datasets, evaluation protocols, and ablation findings used to validate activation steering in Ines.
 
 ---
 
@@ -61,4 +61,4 @@ Each behavioral vector is evaluated across 50 standardized prompts split into th
 
 1. **Layer Specificity Matters**: Intervening in early layers ($l < 8$) disrupts basic syntactic coherence and token embeddings. Intervening in very late layers ($l > 28$) often arrives too late to steer high-level semantic commitments. The middle-to-late residual stream ($l \in [14, 22]$) offers the optimal balance of abstract conceptual influence without grammatical degradation.
 2. **Monotonic Scaling**: For $\alpha \in [0.5, 2.2]$, behavioral intensity scales almost linearly with $\alpha$.
-3. **Threshold for Instability**: Beyond $\alpha > 2.8$, the intervention induces repetition loops and lexical collapse, establishing an empirical safety boundary for Sephora's UI sliders.
+3. **Threshold for Instability**: Beyond $\alpha > 2.8$, the intervention induces repetition loops and lexical collapse, establishing an empirical safety boundary for Ines's UI sliders.

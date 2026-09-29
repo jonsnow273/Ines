@@ -1,5 +1,5 @@
 """
-Whisper speech-to-text transcriber for Sephora.
+Whisper speech-to-text transcriber for Ines.
 Loads OpenAI Whisper locally and transcribes audio files to text.
 """
 

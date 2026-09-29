@@ -1,5 +1,5 @@
 """
-Sephora — The first local AI assistant with controllable internal behavior.
+Ines — The first local AI assistant with controllable internal behavior.
 Main application entry point and interactive CLI loop.
 """
 
@@ -15,12 +15,12 @@ if str(PROJECT_ROOT) not in sys.path:
 from core import config, logger, AVAILABLE_STEERING_PRESETS
 
 BANNER = r"""
-   _____ ______ _____  _    _  ____  _____            
-  / ____|  ____|  __ \| |  | |/ __ \|  __ \   /\      
- | (___ | |__  | |__) | |__| | |  | | |__) | /  \     
-  \___ \|  __| |  ___/|  __  | |  | |  _  / / /\ \    
-  ____) | |____| |    | |  | | |__| | | \ \/ ____ \   
- |_____/|______|_|    |_|  |_|\____/|_|  \_\_/    \_\  
+   _____ _   _ ______  _____ 
+  |_   _| \ | |  ____|/ ____|
+    | | |  \| | |__  | (___  
+    | | | . ` |  __|  \___ \ 
+   _| |_| |\  | |____ ____) |
+  |_____|_| \_|______|_____/ 
 ======================================================
  The First Local AI Assistant with Controllable Behavior
 ======================================================
@@ -57,7 +57,7 @@ def check_dependencies() -> bool:
 def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_name: str = None):
     """Run the interactive terminal chat loop."""
     print(BANNER)
-    print("Initializing Sephora Cognitive Core...")
+    print("Initializing Ines Cognitive Core...")
 
     if not check_dependencies():
         print()
@@ -83,7 +83,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
 
     print()
     print("=" * 54)
-    print("Sephora is online! Commands:")
+    print("Ines is online! Commands:")
     print("  /steer <preset> [strength] - Change behavioral direction")
     print("  /reset                     - Reset to neutral (unsteered)")
     print("  /compare <prompt>          - Side-by-side steered vs unsteered")
@@ -104,7 +104,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
                 continue
 
             if user_input.lower() in ("/quit", "/exit", "exit", "quit"):
-                print("Shutting down Sephora. Goodbye!")
+                print("Shutting down Ines. Goodbye!")
                 break
 
             elif user_input.startswith("/steer"):
@@ -136,7 +136,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
                 if extra_prompt:
                     messages.append({"role": "user", "content": extra_prompt})
                     print(f"\nYou [{p_name}:{steering.status['active_alpha']}x]> {extra_prompt}")
-                    print("\nSephora: ", end="", flush=True)
+                    print("\nInes: ", end="", flush=True)
                     response = steering.generate_steered(messages)
                     print(response + "\n")
                     messages.append({"role": "assistant", "content": response})
@@ -183,7 +183,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
 
             messages.append({"role": "user", "content": user_input})
             print()
-            print("Sephora: ", end="", flush=True)
+            print("Ines: ", end="", flush=True)
             response = steering.generate_steered(messages)
             print(response)
             print()
@@ -199,7 +199,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Sephora — The First Local AI Assistant with Controllable Internal Behavior."
+        description="Ines — The First Local AI Assistant with Controllable Internal Behavior."
     )
     parser.add_argument("--info", action="store_true", help="Print system configuration and exit")
     parser.add_argument("--steer", type=str, default="neutral", choices=AVAILABLE_STEERING_PRESETS,

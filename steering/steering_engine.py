@@ -1,5 +1,5 @@
 """
-Runtime activation steering engine for Sephora.
+Runtime activation steering engine for Ines.
 
 Manages the lifecycle of steering: selecting presets, computing
 directions, registering hooks, and executing steered inference.
@@ -19,7 +19,7 @@ from steering.direction_finder import DirectionFinder
 
 class SteeringEngine:
     """
-    Top-level controller for activation steering in Sephora.
+    Top-level controller for activation steering in Ines.
 
     Workflow:
         1. Call `calibrate()` to compute and cache all preset vectors.

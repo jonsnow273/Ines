@@ -1,5 +1,5 @@
 """
-Text generation pipeline for Sephora.
+Text generation pipeline for Ines.
 Handles single-turn and multi-turn generation with optional streaming.
 """
 

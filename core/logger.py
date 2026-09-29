@@ -1,5 +1,5 @@
 """
-Centralized logging for Sephora.
+Centralized logging for Ines.
 Configures structured file and console logging with automatic fallback.
 """
 
@@ -9,7 +9,7 @@ import logging
 from pathlib import Path
 from core.constants import LOGS_DIR
 
-LOG_FILE_PATH = LOGS_DIR / "sephora.log"
+LOG_FILE_PATH = LOGS_DIR / "ines.log"
 
 try:
     from loguru import logger as _loguru_logger
@@ -50,7 +50,7 @@ else:
             logging.FileHandler(str(LOG_FILE_PATH), encoding="utf-8"),
         ],
     )
-    logger = logging.getLogger("sephora")
+    logger = logging.getLogger("ines")
 
 
 def set_log_level(level: str) -> None:

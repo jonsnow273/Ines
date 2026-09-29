@@ -1,5 +1,5 @@
 """
-Full voice input pipeline for Sephora.
+Full voice input pipeline for Ines.
 Combines AudioRecorder + WhisperTranscriber into a single
 speak-and-get-text interface.
 """

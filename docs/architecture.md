@@ -1,6 +1,6 @@
-# 🏛️ Sephora System Architecture
+# 🏛️ Ines System Architecture
 
-> **Architectural Philosophy**: Sephora positions **internal activation steering at the cognitive center** of the local assistant. The OS automation, multilingual voice capture, and React interface are structured around a controllable, steerable inference core.
+> **Architectural Philosophy**: Ines positions **internal activation steering at the cognitive center** of the local assistant. The OS automation, multilingual voice capture, and React interface are structured around a controllable, steerable inference core.
 
 ---
 
@@ -28,7 +28,7 @@
                                                   │
                                                   ▼
 +-------------------------------------------------------------------------------+
-|                       SEPHORA COGNITIVE ENGINE (Core)                         |
+|                       INES COGNITIVE ENGINE (Core)                         |
 |                                                                               |
 |   +───────────────────────────────────────────────────────────────────────+   |
 |   |         Activation Steering Subsystem (TransformerLens)               |   |
@@ -67,7 +67,7 @@
 ## 🧩 Architectural Layers & Responsibilities
 
 ### 1. The Steering & Cognitive Core (`llm/`, `steering/`)
-Unlike traditional wrappers that only see inputs and outputs, Sephora taps directly into the model's forward execution pass:
+Unlike traditional wrappers that only see inputs and outputs, Ines taps directly into the model's forward execution pass:
 - **`steering/hook_manager.py`**: Manages registration and clean detachment of PyTorch forward hooks using TransformerLens.
 - **`steering/direction_finder.py`**: Calculates contrastive activation directions and PCA decomposition from calibrated reference sets.
 - **`steering/steering_engine.py`**: Dynamically injects perturbations during generation based on user slider coefficients $\alpha$.
@@ -85,7 +85,7 @@ Unlike traditional wrappers that only see inputs and outputs, Sephora taps direc
 - **Confirmation Subsystem**: Halts destructive commands (deletion, overwriting) pending explicit human approval via the React modal or CLI confirmation.
 
 ### 4. Multilingual Voice Pipeline (`voice/`)
-- Always-on background listener triggered by local `openWakeWord` ("Hey Sephora").
+- Always-on background listener triggered by local `openWakeWord` ("Hey Ines").
 - Speech-to-text powered by local OpenAI `whisper` with automatic language identification across 6 primary languages.
 
 ### 5. Reactive Frontend (`frontend/`)

@@ -1,6 +1,6 @@
 # 🎙️ Voice & Wake Word Setup Guide
 
-This guide walks you through setting up microphone capture, the "Hey Sephora" wake word engine, and local speech-to-text with OpenAI Whisper.
+This guide walks you through setting up microphone capture, the "Hey Ines" wake word engine, and local speech-to-text with OpenAI Whisper.
 
 ---
 
@@ -19,14 +19,14 @@ Run the following Python one-liner to list your active microphones:
 ```bash
 python -c "import sounddevice as sd; print(sd.query_devices())"
 ```
-Note the device index of your microphone and set `microphone_index` in `configs/sephora_settings.yaml` (or leave as `null` for system default).
+Note the device index of your microphone and set `microphone_index` in `configs/ines_settings.yaml` (or leave as `null` for system default).
 
 ### 2. Prepare Wake Word Model
 Run the wake word setup script:
 ```bash
 python scripts/setup_wake_word.py
 ```
-This downloads or verifies the openWakeWord ONNX model for "Hey Sephora".
+This downloads or verifies the openWakeWord ONNX model for "Hey Ines".
 
 ### 3. Verify Whisper Model
 Whisper models are downloaded automatically on first run and cached locally in `models/` or `~/.cache/whisper`.
@@ -40,7 +40,7 @@ python scripts/download_models.py --model whisper-medium
 ## 🔄 Voice Pipeline Loop
 
 1. **Background Listener**: Listens to ambient mic input.
-2. **Wake Word Triggered**: On detecting "Hey Sephora", status changes from `idle` to `listening`.
+2. **Wake Word Triggered**: On detecting "Hey Ines", status changes from `idle` to `listening`.
 3. **Audio Recording**: Buffers speech until silence is detected (`silence_timeout_seconds`).
 4. **Whisper Transcription**: Audio buffer is converted to text and automatically language-tagged.
 5. **Core Execution**: Transcribed text is submitted to the intent classifier & chat engine.

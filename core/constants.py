@@ -1,5 +1,5 @@
 """
-Application-wide constants, file path resolutions, and default values for Sephora.
+Application-wide constants, file path resolutions, and default values for Ines.
 """
 
 import os
@@ -22,7 +22,7 @@ CONVERSATIONS_DIR = CONVERSATION_HISTORY_DIR  # alias used by chatbot module
 STEERING_PRESETS_DIR = DATA_DIR / "steering_presets"
 
 # Default Configuration Filepaths
-SETTINGS_CONFIG_PATH = CONFIGS_DIR / "sephora_settings.yaml"
+SETTINGS_CONFIG_PATH = CONFIGS_DIR / "ines_settings.yaml"
 MODEL_CONFIG_PATH = CONFIGS_DIR / "model_config.yaml"
 WHITELIST_CONFIG_PATH = CONFIGS_DIR / "automation_whitelist.yaml"
 LANGUAGES_CONFIG_PATH = CONFIGS_DIR / "languages.yaml"

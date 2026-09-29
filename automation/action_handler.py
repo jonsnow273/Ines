@@ -1,5 +1,5 @@
 """
-PC action handler for Sephora.
+PC action handler for Ines.
 Executes whitelisted automation actions like opening apps, files,
 and URLs with safety checks and user confirmation.
 """

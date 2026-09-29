@@ -1,5 +1,5 @@
 """
-CORS middleware configuration for Sephora API.
+CORS middleware configuration for Ines API.
 Allows the React frontend (localhost:5173) to connect.
 """
 

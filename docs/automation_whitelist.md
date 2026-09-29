@@ -1,13 +1,13 @@
 # 🛡️ PC Automation Whitelist & Safety Architecture
 
-Sephora automates desktop actions while maintaining strict security boundaries to prevent accidental or malicious system damage.
+Ines automates desktop actions while maintaining strict security boundaries to prevent accidental or malicious system damage.
 
 ---
 
 ## 📜 Whitelist Principles
 
 1. **Explicit Whitelist Only**: No command is executed unless its action name exists in `configs/automation_whitelist.yaml`.
-2. **No Raw Shell Execution**: Sephora does not pass user strings directly to `cmd.exe`, `powershell.exe`, or `bash`.
+2. **No Raw Shell Execution**: Ines does not pass user strings directly to `cmd.exe`, `powershell.exe`, or `bash`.
 3. **Structured Parameter Extraction**: The intent classifier extracts strict structured arguments (e.g., `{ "action": "create_folder", "name": "Project", "path": "..." }`).
 
 ---

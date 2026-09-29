@@ -1,6 +1,6 @@
-# 🗺️ Sephora Project Roadmap: Controllable Local AI
+# 🗺️ Ines Project Roadmap: Controllable Local AI
 
-This document details development milestones, research objectives, and implementation phases for the Sephora project.
+This document details development milestones, research objectives, and implementation phases for the Ines project.
 
 ---
 
@@ -39,7 +39,7 @@ This document details development milestones, research objectives, and implement
 
 ## 🎙️ Phase 3: Multilingual Voice Interaction
 - [x] Microphone streaming & language configuration specs (`docs/voice_setup.md`, `docs/multilingual_support.md`)
-- [ ] Background openWakeWord listener targeting "Hey Sephora"
+- [ ] Background openWakeWord listener targeting "Hey Ines"
 - [ ] Local OpenAI Whisper integration (`medium` / `large-v3`)
 - [ ] Dynamic language routing across 6 primary languages
 - [ ] Low-latency audio ingestion WebSocket

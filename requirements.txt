@@ -1,5 +1,5 @@
 # ============================================================
-# Sephora — requirements.txt
+# Ines — requirements.txt
 # ============================================================
 # Install: pip install -r requirements.txt
 # Python 3.10+ required
@@ -34,7 +34,7 @@ scipy>=1.12.0                  # Signal processing
 # ──────────────────────────────────────────────────────────
 # VOICE: Wake Word Detection
 # ──────────────────────────────────────────────────────────
-openwakeword>=0.6.0            # "Hey Sephora" local wake word detection
+openwakeword>=0.6.0            # "Hey Ines" local wake word detection
 onnxruntime>=1.17.0            # ONNX runtime for wake word model inference
 pyaudio>=0.2.14                # Audio stream backend (alternative to sounddevice)
 

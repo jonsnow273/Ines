@@ -1,5 +1,5 @@
 # ============================================================
-# Sephora .gitignore
+# Ines .gitignore
 # ============================================================
 
 # Python
@@ -93,7 +93,7 @@ wake_word_data/
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb
-!sephora_colab.ipynb
+!ines_colab.ipynb
 
 # OS
 ehthumbs.db

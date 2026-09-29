@@ -1,5 +1,5 @@
 """
-Core foundation module for Sephora.
+Core foundation module for Ines.
 Provides centralized constants, logger, and configuration instances.
 """
 

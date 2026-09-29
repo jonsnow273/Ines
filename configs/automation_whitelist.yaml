@@ -1,6 +1,6 @@
 # =============================================================
-# Sephora - Automation Whitelist
-# Controls which PC actions Sephora is allowed to execute.
+# Ines - Automation Whitelist
+# Controls which PC actions Ines is allowed to execute.
 # Each category can be enabled/disabled independently.
 # Actions not in the "allowed" list are blocked by default.
 # =============================================================

@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Sephora brand palette - dark purple/violet theme
-        sephora: {
+        // Ines brand palette - dark purple/violet theme
+        ines: {
           50:  '#f5f3ff',
           100: '#ede9fe',
           200: '#ddd6fe',

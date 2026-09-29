@@ -1,5 +1,5 @@
 """
-Centralized configuration manager for Sephora.
+Centralized configuration manager for Ines.
 Loads environment variables from .env and YAML configurations from configs/.
 Features graceful fallbacks if pyyaml or python-dotenv are not yet installed.
 """
@@ -80,7 +80,7 @@ class ConfigManager:
     # Typed Properties for major subsystems
     @property
     def assistant_name(self) -> str:
-        return self.get("assistant.name", "Sephora")
+        return self.get("assistant.name", "Ines")
 
     @property
     def default_language(self) -> str:
@@ -113,12 +113,16 @@ class ConfigManager:
         return str(self.get("llm.model_name", "Qwen/Qwen2.5-0.5B-Instruct"))
 
     @property
+    def default_model(self) -> str:
+        return self.model_name
+
+    @property
     def alternate_model_name(self) -> str:
         return str(self.get("llm.alternate_model", "mistralai/Mistral-7B-Instruct-v0.3"))
 
     @property
     def device(self) -> str:
-        env_device = os.getenv("SEPHORA_DEVICE")
+        env_device = os.getenv("INES_DEVICE")
         if env_device:
             return env_device.lower()
         return str(self.get("llm.device", "cuda"))
@@ -171,7 +175,7 @@ class ConfigManager:
 
     @property
     def wake_phrase(self) -> str:
-        return str(self.get("assistant.wake_phrase", "hey sephora"))
+        return str(self.get("assistant.wake_phrase", "hey ines"))
 
     # Environment overrides
     @property

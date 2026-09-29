@@ -1,5 +1,5 @@
 """
-Automation module — PC action execution for Sephora.
+Automation module — PC action execution for Ines.
 
 Provides:
 - WhitelistManager: validates actions against the safety whitelist

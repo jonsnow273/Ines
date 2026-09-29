@@ -7,7 +7,7 @@ export function Header({ sessionId, onClear }: Props) {
   return (
     <header className="border-b border-zinc-700 bg-zinc-900 px-6 py-3 flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <h1 className="text-lg font-bold text-white">🧠 Sephora</h1>
+        <h1 className="text-lg font-bold text-white">🧠 Ines</h1>
         <span className="text-xs text-zinc-500 hidden sm:inline">
           Local AI Assistant with Controllable Behavior
         </span>

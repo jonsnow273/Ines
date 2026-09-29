@@ -1,4 +1,4 @@
-# Sephora - Model Configuration
+# Ines - Model Configuration
 
 primary_model:
   repo_id: "mistralai/Mistral-7B-Instruct-v0.3"
