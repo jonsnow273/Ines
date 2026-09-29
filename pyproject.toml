@@ -3,14 +3,14 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.backends.legacy:build"
 
 [project]
-name = "sephora"
+name = "ines"
 version = "0.1.0"
 description = "The first local AI assistant with controllable internal behavior via activation steering"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [
-    {name = "Sephora Research Team", email = "team@sephora-ai.local"}
+    {name = "Ines Research Team", email = "team@ines-ai.local"}
 ]
 keywords = [
     "activation-steering",
@@ -23,7 +23,7 @@ keywords = [
 ]
 
 [project.scripts]
-sephora = "main:main"
+ines = "main:main"
 
 [tool.black]
 line-length = 100

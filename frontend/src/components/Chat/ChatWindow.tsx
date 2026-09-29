@@ -20,7 +20,7 @@ export function ChatWindow({ messages, loading }: Props) {
       <div className="max-w-4xl mx-auto">
         {messages.length === 0 && (
           <div className="text-center text-zinc-500 mt-20">
-            <h2 className="text-2xl font-bold text-zinc-300 mb-2">Sephora</h2>
+            <h2 className="text-2xl font-bold text-zinc-300 mb-2">Ines</h2>
             <p className="text-sm">The first local AI assistant with controllable behavior.</p>
             <p className="text-xs mt-4 text-zinc-600">Type a message to start chatting.</p>
           </div>

@@ -1,12 +1,12 @@
 # 🌍 Multilingual Voice & Chat Support
 
-Sephora is designed to communicate and understand commands in **multiple languages** without requiring cloud translation services.
+Ines is designed to communicate and understand commands in **multiple languages** without requiring cloud translation services.
 
 ---
 
 ## 🌐 Supported Languages
 
-Sephora provides 6 primary language slots configured in `configs/languages.yaml`:
+Ines provides 6 primary language slots configured in `configs/languages.yaml`:
 
 | Language Code | Language | Default State | Whisper Code |
 |---------------|----------|---------------|--------------|
@@ -27,7 +27,7 @@ Sephora provides 6 primary language slots configured in `configs/languages.yaml`
 2. **Automatic Language Detection**: Whisper detects the language probability distribution during the initial audio chunk.
 3. **Transcription**: Audio is transcribed into the detected language's script.
 4. **Intent Handling**: Intent classification maps multilingual commands (e.g., *"Crea una carpeta llamada Proyectos"* or *"एक फ़ोल्डर बनाओ"*) to canonical actions (`create_folder`).
-5. **Response Generation**: Sephora replies in the user's spoken language.
+5. **Response Generation**: Ines replies in the user's spoken language.
 
 ---
 

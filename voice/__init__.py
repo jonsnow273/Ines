@@ -1,5 +1,5 @@
 """
-Voice module — Speech-to-text pipeline for Sephora.
+Voice module — Speech-to-text pipeline for Ines.
 
 Provides:
 - AudioRecorder: captures mic input as WAV using sounddevice

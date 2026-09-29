@@ -1,5 +1,5 @@
 """
-Chat REST API routes for Sephora.
+Chat REST API routes for Ines.
 Handles message sending, session management, and conversation history.
 """
 

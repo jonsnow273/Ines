@@ -1,4 +1,4 @@
-# 🔬 Sephora: The First Local AI Assistant with Controllable Internal Behavior
+# 🔬 Ines: The First Local AI Assistant with Controllable Internal Behavior
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -8,9 +8,9 @@
 
 > **"Can an AI assistant's observable behavior be systematically controlled by modifying internal model activations rather than engineering system prompts?"**
 
-**Sephora** is an experimental, privacy-first local AI assistant that explores controlling an LLM's observable behavior through **activation-level interventions** during the forward pass. While conventional assistants rely entirely on prompt engineering to tweak their tone and behavior, Sephora demonstrates how the exact same model weights and the exact same user prompt can yield radically different behavioral characteristics—such as **concise**, **cautious**, **detailed**, or **creative** responses—by directly steering internal residual stream representations.
+**Ines** is an experimental, privacy-first local AI assistant that explores controlling an LLM's observable behavior through **activation-level interventions** during the forward pass. While conventional assistants rely entirely on prompt engineering to tweak their tone and behavior, Ines demonstrates how the exact same model weights and the exact same user prompt can yield radically different behavioral characteristics—such as **concise**, **cautious**, **detailed**, or **creative** responses—by directly steering internal residual stream representations.
 
-Alongside this mechanistic research core, Sephora remains a fully functional, user-friendly personal desktop assistant featuring **local multilingual voice interaction**, **safe whitelisted PC automation**, and a **modern React + Tailwind dashboard**.
+Alongside this mechanistic research core, Ines remains a fully functional, user-friendly personal desktop assistant featuring **local multilingual voice interaction**, **safe whitelisted PC automation**, and a **modern React + Tailwind dashboard**.
 
 ---
 
@@ -20,13 +20,13 @@ Alongside this mechanistic research core, Sephora remains a fully functional, us
 
 Most modern AI assistants modify behavior by altering instructions in token space (e.g., adding *"You are a concise assistant"* to the prompt). While intuitive, prompt-based conditioning is fundamentally constrained: it consumes valuable context tokens, can be overridden by user prompt injections, and lacks continuous calibration.
 
-Sephora intervenes at the **representation level**:
+Ines intervenes at the **representation level**:
 
 ```
 Traditional Prompt Approach:
   [ User Prompt ] + [ Long Behavioral System Prompt ] ──► [ Standard Forward Pass ] ──► Output
 
-Sephora Activation Steering:
+Ines Activation Steering:
   [ User Prompt ] ──────────────────────────────────────► [ Transformer Layers ]
                                                                    │
                                                       Layer L: x' = x + α · v_direction
@@ -77,7 +77,7 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 - **Whitelisted Handlers**: File management, application launching, system search, audio playback, and VS Code code generation.
 
 ### 4. 🎙️ Multilingual Voice Interaction
-- Low-overhead, always-on wake word engine: **"Hey Sephora"** via local `openWakeWord`.
+- Low-overhead, always-on wake word engine: **"Hey Ines"** via local `openWakeWord`.
 - High-accuracy local speech-to-text via **OpenAI Whisper** (`medium` or `large-v3`).
 - Native language detection and support for **6 primary languages** (configurable in `configs/languages.yaml`).
 - Transcribed speech streams directly into the same intent and steering pipeline as typed input.
@@ -88,7 +88,7 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 
 ```
                                   [ User Touchpoints ]
-                    Voice ("Hey Sephora")  │  Web Dashboard  │  CLI
+                    Voice ("Hey Ines")  │  Web Dashboard  │  CLI
                                            ▼
                                  [ FastAPI Gateway ]
                                            │
@@ -135,8 +135,8 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 
 ### 1. Repository Setup
 ```bash
-git clone https://github.com/your-org/sephora.git
-cd sephora
+git clone https://github.com/your-org/ines.git
+cd ines
 
 # Setup Python virtual environment
 python -m venv venv
@@ -195,12 +195,12 @@ Navigate to **`http://localhost:5173`** to access both the conversational assist
 
 ## 🤝 Team Contribution & Research Collaboration
 
-Sephora is actively developed as a modular research project. We follow structured peer reviews and strict branch naming conventions. Please review [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting pull requests.
+Ines is actively developed as a modular research project. We follow structured peer reviews and strict branch naming conventions. Please review [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting pull requests.
 
 ---
 
 ## ⚖️ Scientific Rigor & Limitations
-Sephora is an experimental system. We explicitly acknowledge observed research limitations:
+Ines is an experimental system. We explicitly acknowledge observed research limitations:
 1. **Saturation Limits**: Steering values |α| > 2.8 can degrade grammar or trigger token repetition.
 2. **Quantization Effects**: 4-bit quantization slightly degrades steering vector resolution relative to FP16.
 3. **Task Generalization**: Vectors derived from conversational corpora may show reduced efficacy on specialized syntax tasks (e.g., deep code compilation).

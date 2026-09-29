@@ -1,5 +1,5 @@
 """
-Tokenizer abstraction layer for Sephora.
+Tokenizer abstraction layer for Ines.
 Handles prompt formatting and chat template application.
 """
 

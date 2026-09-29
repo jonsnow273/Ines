@@ -1,10 +1,10 @@
-# Sephora Master Configuration
+# Ines Master Configuration
 # Core Identity: The first local AI assistant with controllable internal behavior
 
 assistant:
-  name: "Sephora"
+  name: "Ines"
   tagline: "Controllable Local AI Assistant"
-  wake_phrase: "hey sephora"
+  wake_phrase: "hey ines"
   default_language: "en"
 
 # Activation Steering Subsystem (Core Research Feature)

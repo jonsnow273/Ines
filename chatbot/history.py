@@ -1,5 +1,5 @@
 """
-Conversation history manager for Sephora.
+Conversation history manager for Ines.
 Saves and loads message lists as JSON per session.
 """
 

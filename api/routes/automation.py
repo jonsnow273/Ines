@@ -1,5 +1,5 @@
 """
-Automation REST API routes for Sephora.
+Automation REST API routes for Ines.
 Handles PC action execution with whitelist validation.
 """
 

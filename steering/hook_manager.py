@@ -1,5 +1,5 @@
 """
-TransformerLens-compatible hook manager for Sephora activation steering.
+TransformerLens-compatible hook manager for Ines activation steering.
 
 Registers forward hooks on the model's residual stream layers
 to intercept and modify hidden states during inference.

@@ -31,7 +31,7 @@ export default function App() {
 
           <div className="mt-6 text-xs text-zinc-600 space-y-2">
             <p className="font-semibold text-zinc-500">Quick Guide</p>
-            <p>Select a preset to change Sephora's behavior in real-time using activation steering.</p>
+            <p>Select a preset to change Ines's behavior in real-time using activation steering.</p>
             <p><strong>Concise</strong> — shorter, direct answers</p>
             <p><strong>Detailed</strong> — thorough explanations</p>
             <p><strong>Creative</strong> — more imaginative responses</p>

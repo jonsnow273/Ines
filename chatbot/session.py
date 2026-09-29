@@ -1,5 +1,5 @@
 """
-Session management for Sephora.
+Session management for Ines.
 Creates, lists, and resumes conversation sessions.
 """
 

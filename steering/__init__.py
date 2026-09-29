@@ -1,5 +1,5 @@
 """
-Steering module — Activation Steering research core for Sephora.
+Steering module — Activation Steering research core for Ines.
 
 Provides:
 - SteeringPreset definitions and registry (presets.py)

@@ -1,5 +1,5 @@
 """
-Settings REST API routes for Sephora.
+Settings REST API routes for Ines.
 Read and update application configuration.
 """
 

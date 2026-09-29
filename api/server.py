@@ -1,5 +1,5 @@
 """
-Sephora FastAPI Server.
+Ines FastAPI Server.
 Bridges the React frontend to the Python AI backend.
 
 Run with:
@@ -31,7 +31,7 @@ def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
 
     app = FastAPI(
-        title="Sephora API",
+        title="Ines API",
         description="The first local AI assistant with controllable behavior.",
         version="0.1.0",
     )
@@ -54,7 +54,7 @@ def create_app() -> FastAPI:
     @app.on_event("startup")
     async def startup():
         """Load model and wire up all modules on server start."""
-        logger.info("Starting Sephora API server...")
+        logger.info("Starting Ines API server...")
 
         try:
             from llm import loader, engine
@@ -89,7 +89,7 @@ def create_app() -> FastAPI:
             chat_ws.init(engine, se, cm)
             voice_ws.init()
 
-            logger.info("Sephora API ready!")
+            logger.info("Ines API ready!")
 
         except Exception as e:
             logger.error(f"Startup failed: {e}")
@@ -98,7 +98,7 @@ def create_app() -> FastAPI:
     @app.get("/")
     async def root():
         return {
-            "name": "Sephora",
+            "name": "Ines",
             "version": "0.1.0",
             "status": "online",
             "docs": "/docs",

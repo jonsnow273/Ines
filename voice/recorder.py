@@ -1,5 +1,5 @@
 """
-Microphone recorder for Sephora.
+Microphone recorder for Ines.
 Captures audio from the default input device and saves it as a WAV file.
 Uses sounddevice for cross-platform mic access.
 """

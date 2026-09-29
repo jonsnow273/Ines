@@ -1,5 +1,5 @@
 """
-Built-in activation steering vector presets for Sephora.
+Built-in activation steering vector presets for Ines.
 
 Each preset defines:
 - Which residual stream layer to target

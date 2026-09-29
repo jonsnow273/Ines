@@ -1,5 +1,5 @@
 """
-Context window manager for Sephora.
+Context window manager for Ines.
 Trims conversation history to stay within the model's token limit.
 """
 

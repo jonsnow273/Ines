@@ -1,5 +1,5 @@
 """
-Voice REST API routes for Sephora.
+Voice REST API routes for Ines.
 Provides voice pipeline status and configuration.
 """
 
