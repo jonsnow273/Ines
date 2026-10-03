@@ -21,6 +21,7 @@ from api.routes import steering as steering_routes
 from api.routes import voice as voice_routes
 from api.routes import automation as automation_routes
 from api.routes import settings as settings_routes
+from api.routes import organizer as organizer_routes
 
 # Import WebSocket modules
 from api.websocket import chat_ws
@@ -46,6 +47,7 @@ def create_app() -> FastAPI:
     app.include_router(voice_routes.router)
     app.include_router(automation_routes.router)
     app.include_router(settings_routes.router)
+    app.include_router(organizer_routes.router)
 
     # WebSocket routes
     app.include_router(chat_ws.router)
@@ -61,6 +63,7 @@ def create_app() -> FastAPI:
             from steering import SteeringEngine
             from chatbot import ContextManager
             from automation import ActionHandler
+            from organizer import FolderWatcher, AuditLog
 
             # Load model
             logger.info(f"Loading model: {config.default_model}")
@@ -79,11 +82,16 @@ def create_app() -> FastAPI:
             # Init automation
             ah = ActionHandler(require_confirmation=config.confirmation_required)
 
+            # Init organizer
+            org_audit = AuditLog()
+            org_watcher = FolderWatcher()
+
             # Wire dependencies into routes
             chat_routes.init(engine, se, cm)
             steering_routes.init(se, engine)
             voice_routes.init()
             automation_routes.init(ah)
+            organizer_routes.init(org_watcher, org_audit)
 
             # Wire WebSocket handlers
             chat_ws.init(engine, se, cm)

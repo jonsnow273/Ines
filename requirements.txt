@@ -71,3 +71,6 @@ rich>=13.7.0                   # Beautiful terminal output & logging
 click>=8.1.7                   # CLI argument parsing for main.py
 tqdm>=4.66.2                   # Progress bars (model download, transcription)
 loguru>=0.7.2                  # Structured logging
+
+# File Organizer
+PyMuPDF>=1.24.0               # PDF text extraction for organizer

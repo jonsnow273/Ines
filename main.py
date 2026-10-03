@@ -7,6 +7,12 @@ import sys
 import argparse
 from pathlib import Path
 
+# Safe UTF-8 console output for Windows terminals
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 # Ensure project root is in sys.path
 PROJECT_ROOT = Path(__file__).resolve().parent
 if str(PROJECT_ROOT) not in sys.path:
@@ -205,12 +211,42 @@ def main():
     parser.add_argument("--steer", type=str, default="neutral", choices=AVAILABLE_STEERING_PRESETS,
                         help="Initial steering preset (default: neutral)")
     parser.add_argument("--strength", type=float, default=1.5, help="Initial steering strength alpha")
-    parser.add_argument("--model", type=str, default=None, help="Override model name")
+    parser.add_argument("--organize", action="store_true", help="Scan and organize files in watched folders")
+    parser.add_argument("--dry-run", action="store_true", help="Simulate organization without moving files")
+    parser.add_argument("--watch", action="store_true", help="Start background folder watcher daemon")
 
     args = parser.parse_args()
 
     if args.info:
         print_system_info()
+        return
+
+    if args.organize:
+        from organizer import FolderWatcher
+        print(BANNER)
+        print("Starting Smart File Organizer...")
+        watcher = FolderWatcher()
+        results = watcher.scan_existing(dry_run=args.dry_run)
+        print(f"\nCompleted scan of {len(results)} items. (Dry run: {args.dry_run})")
+        for r in results:
+            print(f"  - {r.get('file')}: {r.get('category', 'N/A')} [{r.get('action')}]")
+        return
+
+    if args.watch:
+        import time
+        from organizer import FolderWatcher
+        print(BANNER)
+        print("Starting Real-time Folder Watcher daemon...")
+        watcher = FolderWatcher()
+        watcher.start()
+        print(f"Watching folders: {', '.join(str(p) for p in watcher.watch_dirs)}")
+        print("Press Ctrl+C to stop.")
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            watcher.stop()
+            print("\nWatcher stopped.")
         return
 
     run_interactive_cli(preset_name=args.steer, alpha=args.strength, model_name=args.model)
