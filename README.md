@@ -10,7 +10,7 @@
 
 **Ines** is an experimental, privacy-first local AI assistant that explores controlling an LLM's observable behavior through **activation-level interventions** during the forward pass. While conventional assistants rely entirely on prompt engineering to tweak their tone and behavior, Ines demonstrates how the exact same model weights and the exact same user prompt can yield radically different behavioral characteristics—such as **concise**, **cautious**, **detailed**, or **creative** responses—by directly steering internal residual stream representations.
 
-Alongside this mechanistic research core, Ines remains a fully functional, user-friendly personal desktop assistant featuring **local multilingual voice interaction**, **safe whitelisted PC automation**, and a **modern React + Tailwind dashboard**.
+Alongside this mechanistic research core, Ines remains a fully functional, user-friendly personal desktop assistant featuring **local multilingual voice interaction**, **safe whitelisted PC automation**, **AI-powered file organization**, **on-device digital memory with OCR & vector search**, and a **modern React + Tailwind dashboard** — all running 100% locally with no cloud dependencies.
 
 ---
 
@@ -82,6 +82,34 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 - Native language detection and support for **6 primary languages** (configurable in `configs/languages.yaml`).
 - Transcribed speech streams directly into the same intent and steering pipeline as typed input.
 
+### 5. 📂 AI-Powered File Organizer
+- **Intelligent categorization** of files using extension-based rules with LLM fallback for ambiguous types.
+- **Taxonomy-driven folder structure**: Documents, Images, Videos, Audio, Code, Archives, and more — auto-created under the user's target directory.
+- **LLM-powered classification**: When a file can't be categorized by extension alone, the local LLM analyzes file metadata (name, size, type) to pick the best category.
+- **Duplicate detection**: SHA-256 hashing prevents duplicate files from cluttering organized folders.
+- **Real-time folder watcher**: Uses `watchdog` to monitor directories and auto-organize new files as they arrive.
+- **Full audit trail**: Every move is logged to a JSON audit file with undo support — any organized file can be restored to its original location.
+- **Dry-run mode**: Preview what the organizer would do without actually moving any files.
+- **CLI integration**: `--organize`, `--dry-run`, and `--watch` flags for terminal usage.
+- **REST API**: Endpoints at `/api/organizer/` for scan, start, stop, undo, and audit retrieval.
+
+### 6. 🧠 Digital Memory *(Coming Soon)*
+A privacy-first, on-device screen memory system that captures, indexes, and makes searchable everything the user sees on their screen.
+- **Smart screenshot capture**: Background process captures the screen only when content **changes significantly** (pixel-diff threshold), avoiding redundant storage.
+- **OCR text extraction**: Each screenshot is processed through **Tesseract OCR** (`pytesseract`) to extract searchable text — every word on your screen becomes searchable.
+- **Optional image captioning**: A local vision-language model (e.g., LLaVA) generates short natural-language descriptions for screenshots with primarily visual content (diagrams, charts, UI).
+- **Vector embedding & search**: Extracted text is embedded via **Sentence-Transformers** (`all-MiniLM-L6-v2`) and stored in a local **ChromaDB** vector database, enabling natural-language similarity search.
+- **Privacy controls**: Configurable blacklist to exclude sensitive windows (incognito browsers, banking apps, password managers) from capture.
+- **Auto-cleanup & retention**: Old screenshots are automatically purged after a configurable retention period (default 30 days) while OCR text and embeddings are retained indefinitely.
+- **Storage-efficient**: Compressed JPEG capture (~50-100 KB each) with smart deduplication caps storage at approximately **~2 GB/month**.
+- **100% local & free**: Tesseract, Sentence-Transformers, and ChromaDB are all open-source. No cloud APIs, no subscriptions, no data leaves the device.
+
+### 7. 🔐 User Account System *(Coming Soon)*
+- **Local authentication** with username + bcrypt-hashed password stored in SQLite.
+- **Per-user data isolation**: Each user gets their own private memory silo, organizer settings, conversation history, and steering preferences.
+- **Session persistence**: Close and reopen the app — log back in and all your data (Digital Memory, organized files, chat history) is exactly where you left it.
+- **Multi-user support**: Multiple people sharing the same PC each get their own private, sandboxed workspace.
+
 ---
 
 ## 🏛️ System Architecture
@@ -90,22 +118,32 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
                                   [ User Touchpoints ]
                     Voice ("Hey Ines")  │  Web Dashboard  │  CLI
                                            ▼
-                                 [ FastAPI Gateway ]
+                                  ┌─── [ Auth Gate ] ───┐
+                                  │  (Login / Session)   │
+                                  └────────┬─────────────┘
+                                           ▼
+                                  [ FastAPI Gateway ]
                                            │
-       ┌───────────────────────────────────┴───────────────────────────────────┐
-       ▼                                                                       ▼
-[ Intent Classifier ]                                            [ Activation Steering Lab ]
-       │                                                                       │
-       ├─► Pure Conversation ──┐                             ┌─────────────────┴─────────────────┐
-       │                       ▼                             ▼                                   ▼
-       └─► PC Automation  [ Local LLM ] ◄─────── [ TransformerLens Hooks ]            [ Visual Telemetry ]
-                 │        (Mistral/Gemma)         x' = x + α · v_direction             (Heatmaps & Sliders)
-                 ▼             │
-        [ Whitelist Guard ]    ▼
-                 │       (Steered Output)
-        [ Confirmation ]
-                 │
-        [ OS Handlers ]
+       ┌──────────────┬────────────────────┼────────────────────┬──────────────────┐
+       ▼              ▼                    ▼                    ▼                  ▼
+[ Intent          [ Activation       [ File Organizer ]  [ Digital Memory ]  [ Account
+  Classifier ]      Steering Lab ]         │                    │              System ]
+       │              │              ┌─────┴─────┐        ┌────┴─────┐          │
+       ├─► Chat       │              ▼           ▼        ▼          ▼        users.db
+       │              │         [ Rules +    [ Folder   [ Screen   [ Vector    (SQLite)
+       └─► Automation │          LLM Classify] Watcher]  Capture ]  Store ]
+              │       │              │           │        │          │
+     [ Whitelist ]    │              ▼           │     [ OCR ]    [ ChromaDB ]
+              │       │         [ Audit +   ◄────┘   (Tesseract)     ▲
+     [ Confirm ]      │          Undo ]                   │          │
+              │       │                              [ Embeddings ]──┘
+     [ OS Handlers ]  │                         (Sentence-Transformers)
+                      │
+               [ TransformerLens ]
+              x' = x + α · v_direction
+                      │
+               [ Local LLM ]
+              (Mistral / Gemma)
 ```
 
 ---
@@ -122,6 +160,11 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 | **Backend Gateway** | **FastAPI + WebSockets** | Asynchronous streaming API for tokens and real-time audio |
 | **Frontend UI** | **React 18 + Vite + Tailwind** | Modern dark-themed dashboard with Recharts & Radix UI |
 | **OS Automation** | **Custom Sandboxed Handlers** | Safe execution boundary with explicit whitelists and Recycle Bin guards |
+| **File Organizer** | **watchdog + SHA-256** | Real-time folder monitoring with duplicate detection and LLM-based classification |
+| **OCR Engine** | **Tesseract + pytesseract** | Open-source optical character recognition for screenshot text extraction |
+| **Vector Embeddings** | **Sentence-Transformers** (`all-MiniLM-L6-v2`) | Lightweight local text embeddings for similarity search |
+| **Vector Store** | **ChromaDB** | Persistent on-disk vector database for Digital Memory retrieval |
+| **User Auth** | **SQLite + bcrypt** | Lightweight local user authentication with secure password hashing |
 
 ---
 
@@ -187,6 +230,9 @@ Navigate to **`http://localhost:5173`** to access both the conversational assist
 - [🛡️ PC Automation Whitelist & Safety Specifications](docs/automation_whitelist.md)
 - [🎙️ Voice & Wake Word Configuration](docs/voice_setup.md)
 - [🌍 Multilingual Configuration](docs/multilingual_support.md)
+- [📂 AI File Organizer Guide](docs/file_organizer.md)
+- [🧠 Digital Memory Setup & Usage](docs/digital_memory.md)
+- [🔐 Account System & Multi-User Guide](docs/account_system.md)
 - [🤝 Contribution Guide & PR Workflow](CONTRIBUTING.md)
 - [🗺️ Project Roadmap](ROADMAP.md)
 - [🔒 Security Policy](SECURITY.md)
