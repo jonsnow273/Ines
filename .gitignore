@@ -47,6 +47,12 @@ api_keys.txt
 data/conversation_history/*
 data/steering_presets/*
 data/logs/*
+data/organizer/*
+data/users/*
+data/memory/*
+data/*.db
+data/*.key
+data/*.json
 !data/conversation_history/.gitkeep
 !data/steering_presets/.gitkeep
 !data/logs/.gitkeep

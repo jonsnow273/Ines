@@ -208,17 +208,50 @@ def main():
         description="Ines — The First Local AI Assistant with Controllable Internal Behavior."
     )
     parser.add_argument("--info", action="store_true", help="Print system configuration and exit")
+    parser.add_argument("--model", type=str, default=None, help="Target model to load (Mistral or Gemma)")
     parser.add_argument("--steer", type=str, default="neutral", choices=AVAILABLE_STEERING_PRESETS,
                         help="Initial steering preset (default: neutral)")
     parser.add_argument("--strength", type=float, default=1.5, help="Initial steering strength alpha")
     parser.add_argument("--organize", action="store_true", help="Scan and organize files in watched folders")
     parser.add_argument("--dry-run", action="store_true", help="Simulate organization without moving files")
     parser.add_argument("--watch", action="store_true", help="Start background folder watcher daemon")
+    parser.add_argument("--register", action="store_true", help="Register a new local user account")
+    parser.add_argument("--list-users", action="store_true", help="List registered local user accounts")
 
     args = parser.parse_args()
 
     if args.info:
         print_system_info()
+        return
+
+    if args.register:
+        from auth import init_db, AuthService, UserCreate
+        init_db()
+        print(BANNER)
+        print("--- Register Local User Account ---")
+        username = input("Enter username: ").strip()
+        display_name = input("Enter display name (optional): ").strip() or None
+        import getpass
+        password = getpass.getpass("Enter password (min 6 chars): ").strip()
+        try:
+            user = AuthService.register(UserCreate(username=username, password=password, display_name=display_name))
+            print(f"[OK] Account '{user.username}' created successfully!")
+            print(f"Data directory: data/users/{user.username}/")
+        except Exception as e:
+            print(f"[Error] Failed to create account: {e}")
+        return
+
+    if args.list_users:
+        from auth import init_db, AuthService
+        init_db()
+        print(BANNER)
+        print("--- Registered Local Users ---")
+        users = AuthService.list_users()
+        if not users:
+            print("No users registered yet. Run 'python main.py --register' to create one.")
+        else:
+            for u in users:
+                print(f"  - {u.username} ({u.display_name or 'No display name'}) [Created: {u.created_at}]")
         return
 
     if args.organize:
