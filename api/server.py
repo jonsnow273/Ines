@@ -22,6 +22,7 @@ from api.routes import voice as voice_routes
 from api.routes import automation as automation_routes
 from api.routes import settings as settings_routes
 from api.routes import organizer as organizer_routes
+from api.routes import auth as auth_routes
 
 # Import WebSocket modules
 from api.websocket import chat_ws
@@ -42,6 +43,7 @@ def create_app() -> FastAPI:
     app.add_exception_handler(Exception, global_exception_handler)
 
     # REST routes
+    app.include_router(auth_routes.router)
     app.include_router(chat_routes.router)
     app.include_router(steering_routes.router)
     app.include_router(voice_routes.router)
@@ -57,6 +59,14 @@ def create_app() -> FastAPI:
     async def startup():
         """Load model and wire up all modules on server start."""
         logger.info("Starting Ines API server...")
+
+        # Initialize local auth database
+        try:
+            from auth import init_db
+            init_db()
+            logger.info("Auth database initialized.")
+        except Exception as e:
+            logger.error(f"Auth database initialization failed: {e}")
 
         try:
             from llm import loader, engine

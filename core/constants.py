@@ -21,6 +21,8 @@ CONVERSATION_HISTORY_DIR = DATA_DIR / "conversation_history"
 CONVERSATIONS_DIR = CONVERSATION_HISTORY_DIR  # alias used by chatbot module
 STEERING_PRESETS_DIR = DATA_DIR / "steering_presets"
 ORGANIZER_DIR = DATA_DIR / "organizer"
+USERS_DIR = DATA_DIR / "users"
+MEMORY_DIR = DATA_DIR / "memory"
 
 # Default Configuration Filepaths
 SETTINGS_CONFIG_PATH = CONFIGS_DIR / "ines_settings.yaml"
@@ -57,5 +59,5 @@ INTENT_CHAT = "chat"
 INTENT_AUTOMATION = "automation"
 
 # Ensure runtime directories exist
-for directory in (LOGS_DIR, CONVERSATION_HISTORY_DIR, STEERING_PRESETS_DIR, MODELS_DIR, ORGANIZER_DIR):
+for directory in (LOGS_DIR, CONVERSATION_HISTORY_DIR, STEERING_PRESETS_DIR, MODELS_DIR, ORGANIZER_DIR, USERS_DIR, MEMORY_DIR):
     os.makedirs(directory, exist_ok=True)
