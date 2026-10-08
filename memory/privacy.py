@@ -1,5 +1,5 @@
 """
-Privacy engine for Ines Digital Memory.
+Privacy engine for Megan Digital Memory.
 Inspects foreground windows and active processes against blacklists
 to prevent capturing private chats, banking apps, and credentials.
 """

@@ -1,5 +1,5 @@
 """
-Ines Authentication System.
+Megan Authentication System.
 Local user account management with bcrypt password hashing and JWT session tokens.
 """
 

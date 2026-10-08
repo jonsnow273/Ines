@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Ines brand palette - dark purple/violet theme
-        ines: {
+        // Megan brand palette - dark purple/violet theme
+        megan: {
           50:  '#f5f3ff',
           100: '#ede9fe',
           200: '#ddd6fe',

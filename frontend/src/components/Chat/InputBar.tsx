@@ -35,7 +35,7 @@ export function InputBar({ onSend, disabled }: Props) {
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={disabled ? "Ines is thinking..." : "Type a message..."}
+          placeholder={disabled ? "Megan is thinking..." : "Type a message..."}
           disabled={disabled}
           rows={1}
           className="flex-1 bg-zinc-800 text-zinc-100 border border-zinc-600 rounded-xl px-4 py-3 resize-none focus:outline-none focus:border-indigo-500 disabled:opacity-50 placeholder-zinc-500"

@@ -1,5 +1,5 @@
 """
-FastAPI REST routes for Ines Digital Memory.
+FastAPI REST routes for Megan Digital Memory.
 Allows the React frontend dashboard and external clients to control capture,
 search screen history, retrieve screenshots, and manage privacy settings.
 """

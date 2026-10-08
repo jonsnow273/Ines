@@ -1,5 +1,5 @@
 """
-OCR text extraction module for Ines Digital Memory.
+OCR text extraction module for Megan Digital Memory.
 Uses Tesseract OCR via pytesseract with auto-detection of Windows installation paths,
 text normalization, and graceful degraded mode if Tesseract binary is not present.
 """

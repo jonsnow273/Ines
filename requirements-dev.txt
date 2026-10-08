@@ -1,4 +1,4 @@
-# Ines - Development and Testing Dependencies
+# Megan - Development and Testing Dependencies
 # Install: pip install -r requirements-dev.txt
 
 # Testing

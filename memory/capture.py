@@ -1,5 +1,5 @@
 """
-Smart screen capture engine for Ines Digital Memory.
+Smart screen capture engine for Megan Digital Memory.
 Performs fast screen capture, pixel difference evaluation (skips static screens),
 image downscaling, and high-efficiency JPEG compression.
 """

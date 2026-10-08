@@ -1,5 +1,5 @@
 """
-Text generation pipeline for Ines.
+Text generation pipeline for Megan.
 Handles single-turn and multi-turn generation with optional streaming.
 """
 

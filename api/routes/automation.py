@@ -1,5 +1,5 @@
 """
-Automation REST API routes for Ines.
+Automation REST API routes for Megan.
 Handles PC action execution with whitelist validation.
 """
 

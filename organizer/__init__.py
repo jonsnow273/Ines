@@ -1,5 +1,5 @@
 """
-Ines File Organizer — Autonomous Smart File Organization Module.
+Megan File Organizer — Autonomous Smart File Organization Module.
 
 Watches your Downloads, Desktop, and Documents folders in real-time,
 classifies each new file using extension rules and local LLM intelligence,

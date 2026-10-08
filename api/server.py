@@ -1,5 +1,5 @@
 """
-Ines FastAPI Server.
+Megan FastAPI Server.
 Bridges the React frontend to the Python AI backend.
 
 Run with:
@@ -34,7 +34,7 @@ def create_app() -> FastAPI:
     """Create and configure the FastAPI application."""
 
     app = FastAPI(
-        title="Ines API",
+        title="Megan API",
         description="The first local AI assistant with controllable behavior.",
         version="0.1.0",
     )
@@ -60,7 +60,7 @@ def create_app() -> FastAPI:
     @app.on_event("startup")
     async def startup():
         """Load model and wire up all modules on server start."""
-        logger.info("Starting Ines API server...")
+        logger.info("Starting Megan API server...")
 
         # Initialize local auth database
         try:
@@ -118,7 +118,7 @@ def create_app() -> FastAPI:
             chat_ws.init(engine, se, cm)
             voice_ws.init()
 
-            logger.info("Ines API ready!")
+            logger.info("Megan API ready!")
 
         except Exception as e:
             logger.error(f"Startup failed: {e}")
@@ -127,7 +127,7 @@ def create_app() -> FastAPI:
     @app.get("/")
     async def root():
         return {
-            "name": "Ines",
+            "name": "Megan",
             "version": "0.1.0",
             "status": "online",
             "docs": "/docs",

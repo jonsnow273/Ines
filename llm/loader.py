@@ -1,5 +1,5 @@
 """
-Local LLM loader for Ines.
+Local LLM loader for Megan.
 Loads open-weight models (Mistral 7B / Gemma 2B) with optional
 4-bit or 8-bit quantization using bitsandbytes.
 """

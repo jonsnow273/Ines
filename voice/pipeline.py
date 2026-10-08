@@ -1,5 +1,5 @@
 """
-Full voice input pipeline for Ines.
+Full voice input pipeline for Megan.
 Combines AudioRecorder + WhisperTranscriber into a single
 speak-and-get-text interface.
 """

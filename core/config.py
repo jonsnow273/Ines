@@ -1,5 +1,5 @@
 """
-Centralized configuration manager for Ines.
+Centralized configuration manager for Megan.
 Loads environment variables from .env and YAML configurations from configs/.
 Features graceful fallbacks if pyyaml or python-dotenv are not yet installed.
 """
@@ -80,7 +80,7 @@ class ConfigManager:
     # Typed Properties for major subsystems
     @property
     def assistant_name(self) -> str:
-        return self.get("assistant.name", "Ines")
+        return self.get("assistant.name", "Megan")
 
     @property
     def default_language(self) -> str:
@@ -175,7 +175,7 @@ class ConfigManager:
 
     @property
     def wake_phrase(self) -> str:
-        return str(self.get("assistant.wake_phrase", "hey ines"))
+        return str(self.get("assistant.wake_phrase", "hey megan"))
 
     # Environment overrides
     @property

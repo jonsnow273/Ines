@@ -1,5 +1,5 @@
 """
-Ines Digital Memory package.
+Megan Digital Memory package.
 Privacy-first on-device screen memory with smart change detection,
 OCR text extraction, and semantic vector recall.
 """

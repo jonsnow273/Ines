@@ -1,5 +1,5 @@
 """
-Voice module — Speech-to-text pipeline for Ines.
+Voice module — Speech-to-text pipeline for Megan.
 
 Provides:
 - AudioRecorder: captures mic input as WAV using sounddevice

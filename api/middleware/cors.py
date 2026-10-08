@@ -1,5 +1,5 @@
 """
-CORS middleware configuration for Ines API.
+CORS middleware configuration for Megan API.
 Allows the React frontend (localhost:5173) to connect.
 """
 

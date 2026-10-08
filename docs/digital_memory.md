@@ -1,7 +1,7 @@
-# 🧠 Ines Digital Memory
+# 🧠 Megan Digital Memory
 
 ## Overview
-Ines Digital Memory is a privacy-first, on-device visual memory engine. It periodically snapshots what the user sees on their screen, extracts text via Tesseract OCR, indexes the visual semantics into ChromaDB using dense vector embeddings, and allows natural-language recall ("Where did I see that receipt?", "What was that terminal command?").
+Megan Digital Memory is a privacy-first, on-device visual memory engine. It periodically snapshots what the user sees on their screen, extracts text via Tesseract OCR, indexes the visual semantics into ChromaDB using dense vector embeddings, and allows natural-language recall ("Where did I see that receipt?", "What was that terminal command?").
 
 All captures and embeddings are processed 100% locally on the device with zero cloud dependencies.
 

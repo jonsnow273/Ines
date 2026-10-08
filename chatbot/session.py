@@ -1,5 +1,5 @@
 """
-Session management for Ines.
+Session management for Megan.
 Creates, lists, and resumes conversation sessions.
 """
 

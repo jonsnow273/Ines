@@ -1,5 +1,5 @@
 """
-Steering module — Activation Steering research core for Ines.
+Steering module — Activation Steering research core for Megan.
 
 Provides:
 - SteeringPreset definitions and registry (presets.py)

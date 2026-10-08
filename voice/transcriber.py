@@ -1,5 +1,5 @@
 """
-Whisper speech-to-text transcriber for Ines.
+Whisper speech-to-text transcriber for Megan.
 Loads OpenAI Whisper locally and transcribes audio files to text.
 """
 

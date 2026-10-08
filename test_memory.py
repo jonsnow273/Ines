@@ -1,5 +1,5 @@
 """
-Unit tests for Ines Digital Memory subsystem.
+Unit tests for Megan Digital Memory subsystem.
 Tests privacy rules, diff detection, image optimization, vector storage,
 search queries, and service lifecycle.
 """
@@ -50,7 +50,7 @@ class TestDigitalMemory(unittest.TestCase):
         # Safe apps
         self.assertFalse(guard.is_sensitive("sephora - Visual Studio Code", "code.exe")[0])
         self.assertFalse(guard.is_sensitive("Administrator: Windows PowerShell", "powershell.exe")[0])
-        self.assertFalse(guard.is_sensitive("GitHub - Ines Assistant", "chrome.exe")[0])
+        self.assertFalse(guard.is_sensitive("GitHub - Megan Assistant", "chrome.exe")[0])
 
     def test_02_image_optimization(self):
         """Test downscaling of high-resolution images."""
@@ -149,5 +149,5 @@ class TestDigitalMemory(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    print("\nRunning Ines Digital Memory Unit Tests...\n")
+    print("\nRunning Megan Digital Memory Unit Tests...\n")
     unittest.main(verbosity=2)

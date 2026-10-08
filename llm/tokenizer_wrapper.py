@@ -1,5 +1,5 @@
 """
-Tokenizer abstraction layer for Ines.
+Tokenizer abstraction layer for Megan.
 Handles prompt formatting and chat template application.
 """
 

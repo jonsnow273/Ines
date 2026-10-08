@@ -1,5 +1,5 @@
 """
-Global error handler middleware for Ines API.
+Global error handler middleware for Megan API.
 Catches unhandled exceptions and returns clean JSON errors.
 """
 

@@ -1,5 +1,5 @@
 """
-Context window manager for Ines.
+Context window manager for Megan.
 Trims conversation history to stay within the model's token limit.
 """
 

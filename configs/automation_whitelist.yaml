@@ -1,6 +1,6 @@
 # =============================================================
-# Ines - Automation Whitelist
-# Controls which PC actions Ines is allowed to execute.
+# Megan - Automation Whitelist
+# Controls which PC actions Megan is allowed to execute.
 # Each category can be enabled/disabled independently.
 # Actions not in the "allowed" list are blocked by default.
 # =============================================================

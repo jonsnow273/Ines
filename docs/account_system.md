@@ -1,7 +1,7 @@
 # 🔐 Local Account & User Isolation System
 
 ## Overview
-Ines provides a local-first, privacy-preserving user authentication and data isolation system. All credentials, session tokens, and personal artifacts reside exclusively on the user's physical machine without any external telemetry or cloud identity providers.
+Megan provides a local-first, privacy-preserving user authentication and data isolation system. All credentials, session tokens, and personal artifacts reside exclusively on the user's physical machine without any external telemetry or cloud identity providers.
 
 ---
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 ## 📂 Per-User Directory Isolation
 
-When a user is created, Ines automatically generates isolated workspaces under `data/users/<username>/`:
+When a user is created, Megan automatically generates isolated workspaces under `data/users/<username>/`:
 
 ```
 data/

@@ -1,5 +1,5 @@
 """
-Real-time Folder Watcher for Ines File Organizer.
+Real-time Folder Watcher for Megan File Organizer.
 Uses watchdog to monitor folders and trigger classification + move on new files.
 """
 

@@ -1,5 +1,5 @@
 """
-Vector storage and semantic search engine for Ines Digital Memory.
+Vector storage and semantic search engine for Megan Digital Memory.
 Stores screenshot metadata and OCR text embeddings in ChromaDB per-user,
 with a lightweight built-in fallback store when ML dependencies are not yet installed.
 """

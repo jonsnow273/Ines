@@ -1,10 +1,10 @@
 # 🔒 Security Policy
 
 ## Security Philosophy
-Because Ines combines **Large Language Models** with **PC Automation (OS command execution)**, safety and security are fundamental design requirements, not afterthoughts.
+Because Megan combines **Large Language Models** with **PC Automation (OS command execution)**, safety and security are fundamental design requirements, not afterthoughts.
 
 ### Key Safeguards
-1. **Strict Whitelist Architecture**: Ines does not execute arbitrary shell commands. It maps intents exclusively to pre-defined Python handlers in `automation/handlers/`.
+1. **Strict Whitelist Architecture**: Megan does not execute arbitrary shell commands. It maps intents exclusively to pre-defined Python handlers in `automation/handlers/`.
 2. **Mandatory Confirmation Gate**: Any destructive action (file/directory deletion, file overwrites) requires explicit user confirmation before execution.
 3. **Safe Deletion**: Deletions use system recycle bin utilities (`send2trash`), avoiding permanent `os.remove` data loss.
 4. **Sandboxed Directory Scopes**: Operations are constrained to user-permitted paths to prevent modifications to system directories (`C:\Windows`, `System32`, root system drives).
