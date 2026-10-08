@@ -1,5 +1,5 @@
 """
-File classification rules for Ines File Organizer.
+File classification rules for Megan File Organizer.
 
 Provides fast extension-based classification (no LLM needed for obvious types)
 and defines the target folder taxonomy.
@@ -93,7 +93,7 @@ BLACKLIST_EXTENSIONS = {
 # ── Folder names to never watch or move from ─────────────────────────────────
 BLACKLIST_FOLDER_NAMES = {
     "node_modules", ".git", ".venv", "venv", "__pycache__",
-    "Ines", "ines", "System32", "Program Files",
+    "Megan", "megan", "System32", "Program Files",
 }
 
 # ── File patterns to skip (exact names) ──────────────────────────────────────

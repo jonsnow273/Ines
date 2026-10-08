@@ -1,5 +1,5 @@
 # ============================================================
-# Ines — requirements.txt
+# Megan — requirements.txt
 # ============================================================
 # Install: pip install -r requirements.txt
 # Python 3.10+ required
@@ -34,7 +34,7 @@ scipy>=1.12.0                  # Signal processing
 # ──────────────────────────────────────────────────────────
 # VOICE: Wake Word Detection
 # ──────────────────────────────────────────────────────────
-openwakeword>=0.6.0            # "Hey Ines" local wake word detection
+openwakeword>=0.6.0            # "Hey Megan" local wake word detection
 onnxruntime>=1.17.0            # ONNX runtime for wake word model inference
 pyaudio>=0.2.14                # Audio stream backend (alternative to sounddevice)
 
@@ -74,3 +74,11 @@ loguru>=0.7.2                  # Structured logging
 
 # File Organizer
 PyMuPDF>=1.24.0               # PDF text extraction for organizer
+
+# ──────────────────────────────────────────────────────────
+# DIGITAL MEMORY
+# ──────────────────────────────────────────────────────────
+mss>=9.0.1                     # High-performance screen capture
+pytesseract>=0.3.10            # Tesseract OCR Python wrapper
+chromadb>=0.4.24               # Local vector database for semantic recall
+sentence-transformers>=2.6.0   # Text embeddings for memory retrieval

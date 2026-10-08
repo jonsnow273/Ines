@@ -1,5 +1,5 @@
 """
-AI File Classifier for Ines.
+AI File Classifier for Megan.
 
 Classifies files into categories using:
 1. Fast path: extension-based rules (instant, no LLM)

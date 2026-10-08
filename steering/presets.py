@@ -1,5 +1,5 @@
 """
-Built-in activation steering vector presets for Ines.
+Built-in activation steering vector presets for Megan.
 
 Each preset defines:
 - Which residual stream layer to target

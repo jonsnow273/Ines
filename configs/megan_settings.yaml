@@ -1,10 +1,10 @@
-# Ines Master Configuration
+# Megan Master Configuration
 # Core Identity: The first local AI assistant with controllable internal behavior
 
 assistant:
-  name: "Ines"
+  name: "Megan"
   tagline: "Controllable Local AI Assistant"
-  wake_phrase: "hey ines"
+  wake_phrase: "hey megan"
   default_language: "en"
 
 # Activation Steering Subsystem (Core Research Feature)

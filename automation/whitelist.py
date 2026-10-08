@@ -1,5 +1,5 @@
 """
-Whitelist manager for Ines automation.
+Whitelist manager for Megan automation.
 Loads permitted actions from automation_whitelist.yaml and validates
 user requests before execution.
 """
@@ -38,7 +38,7 @@ DEFAULT_WHITELIST = {
 
 class WhitelistManager:
     """
-    Manages the set of actions Ines is allowed to perform.
+    Manages the set of actions Megan is allowed to perform.
     Actions not on the whitelist are blocked by default.
     """
 

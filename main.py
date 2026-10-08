@@ -1,5 +1,5 @@
 """
-Ines — The first local AI assistant with controllable internal behavior.
+Megan — The first local AI assistant with controllable internal behavior.
 Main application entry point and interactive CLI loop.
 """
 
@@ -21,12 +21,12 @@ if str(PROJECT_ROOT) not in sys.path:
 from core import config, logger, AVAILABLE_STEERING_PRESETS
 
 BANNER = r"""
-   _____ _   _ ______  _____ 
-  |_   _| \ | |  ____|/ ____|
-    | | |  \| | |__  | (___  
-    | | | . ` |  __|  \___ \ 
-   _| |_| |\  | |____ ____) |
-  |_____|_| \_|______|_____/ 
+  __  __ ______ _____          _   _ 
+ |  \/  |  ____/ ____|   /\   | \ | |
+ | \  / | |__ | |  __   /  \  |  \| |
+ | |\/| |  __|| | |_ | / /\ \ | . ` |
+ | |  | | |___| |__| |/ ____ \| |\  |
+ |_|  |_|______\_____/_/    \_\_| \_|
 ======================================================
  The First Local AI Assistant with Controllable Behavior
 ======================================================
@@ -63,7 +63,7 @@ def check_dependencies() -> bool:
 def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_name: str = None):
     """Run the interactive terminal chat loop."""
     print(BANNER)
-    print("Initializing Ines Cognitive Core...")
+    print("Initializing Megan Cognitive Core...")
 
     if not check_dependencies():
         print()
@@ -89,7 +89,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
 
     print()
     print("=" * 54)
-    print("Ines is online! Commands:")
+    print("Megan is online! Commands:")
     print("  /steer <preset> [strength] - Change behavioral direction")
     print("  /reset                     - Reset to neutral (unsteered)")
     print("  /compare <prompt>          - Side-by-side steered vs unsteered")
@@ -110,7 +110,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
                 continue
 
             if user_input.lower() in ("/quit", "/exit", "exit", "quit"):
-                print("Shutting down Ines. Goodbye!")
+                print("Shutting down Megan. Goodbye!")
                 break
 
             elif user_input.startswith("/steer"):
@@ -189,7 +189,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
 
             messages.append({"role": "user", "content": user_input})
             print()
-            print("Ines: ", end="", flush=True)
+            print("Megan: ", end="", flush=True)
             response = steering.generate_steered(messages)
             print(response)
             print()
@@ -205,7 +205,7 @@ def run_interactive_cli(preset_name: str = "neutral", alpha: float = 1.5, model_
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Ines — The First Local AI Assistant with Controllable Internal Behavior."
+        description="Megan — The First Local AI Assistant with Controllable Internal Behavior."
     )
     parser.add_argument("--info", action="store_true", help="Print system configuration and exit")
     parser.add_argument("--model", type=str, default=None, help="Target model to load (Mistral or Gemma)")
@@ -217,6 +217,9 @@ def main():
     parser.add_argument("--watch", action="store_true", help="Start background folder watcher daemon")
     parser.add_argument("--register", action="store_true", help="Register a new local user account")
     parser.add_argument("--list-users", action="store_true", help="List registered local user accounts")
+    parser.add_argument("--memory-start", action="store_true", help="Start the Digital Memory screen capture daemon")
+    parser.add_argument("--memory-capture", action="store_true", help="Capture and index the screen immediately")
+    parser.add_argument("--memory-search", type=str, default=None, help="Search indexed digital memory via query")
 
     args = parser.parse_args()
 
@@ -252,6 +255,62 @@ def main():
         else:
             for u in users:
                 print(f"  - {u.username} ({u.display_name or 'No display name'}) [Created: {u.created_at}]")
+        return
+
+    if args.memory_capture:
+        from memory import DigitalMemoryService
+        print(BANNER)
+        print("Capturing active screen for Digital Memory...")
+        service = DigitalMemoryService()
+        result = service.process_frame(force=True)
+        print(f"Result: {result.get('status')}")
+        if result.get("status") == "captured":
+            print(f"  - Saved: {result.get('screenshot_path')}")
+            print(f"  - App: {result.get('process_name')} ({result.get('window_title')})")
+            print(f"  - Words extracted: {result.get('word_count')}")
+            if result.get("text_snippet"):
+                print(f"  - Snippet: {result.get('text_snippet')}")
+        else:
+            print(f"  - Reason: {result.get('reason')}")
+        return
+
+    if args.memory_search:
+        from memory import DigitalMemoryService
+        print(BANNER)
+        print(f"Searching Digital Memory for: '{args.memory_search}'...")
+        service = DigitalMemoryService()
+        results = service.search(query=args.memory_search, top_k=5)
+        if not results:
+            print("No matching memories found.")
+        else:
+            print(f"\nFound {len(results)} matches:\n")
+            for i, r in enumerate(results, 1):
+                meta = r.get("metadata", {})
+                score = r.get("score", 0.0)
+                print(f"[{i}] Score: {score:.2f} | App: {meta.get('process_name')} | Title: {meta.get('window_title')}")
+                print(f"    File: {meta.get('screenshot_path')}")
+                print(f"    Time: {meta.get('timestamp')}")
+                doc = r.get("text", "")[:150]
+                if doc:
+                    print(f"    Text: {doc}...")
+                print("-" * 50)
+        return
+
+    if args.memory_start:
+        import time
+        from memory import DigitalMemoryService
+        print(BANNER)
+        print("Starting Digital Memory background capture daemon...")
+        service = DigitalMemoryService()
+        service.start()
+        print(f"Interval: {service.interval}s | Screenshots: {service.screenshots_dir}")
+        print("Press Ctrl+C to stop.")
+        try:
+            while True:
+                time.sleep(1)
+        except KeyboardInterrupt:
+            service.stop()
+            print("\nDigital Memory stopped.")
         return
 
     if args.organize:

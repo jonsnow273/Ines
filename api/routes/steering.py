@@ -1,5 +1,5 @@
 """
-Steering REST API routes for Ines.
+Steering REST API routes for Megan.
 Controls activation steering presets, alpha values, and comparison runs.
 """
 

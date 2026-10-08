@@ -1,5 +1,5 @@
 """
-PC action handler for Ines.
+PC action handler for Megan.
 Executes whitelisted automation actions like opening apps, files,
 and URLs with safety checks and user confirmation.
 """

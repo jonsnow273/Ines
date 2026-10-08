@@ -1,5 +1,5 @@
 """
-Organizer REST API routes for Ines.
+Organizer REST API routes for Megan.
 Provides endpoints for smart autonomous file organizing, real-time watcher control,
 dry-run scanning, and audit/undo management.
 """

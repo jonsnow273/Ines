@@ -1,5 +1,5 @@
 """
-Chatbot module — Conversation management for Ines.
+Chatbot module — Conversation management for Megan.
 
 Provides:
 - ConversationHistory: per-session message storage with auto-save

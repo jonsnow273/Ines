@@ -1,5 +1,5 @@
 """
-Audit log for Ines File Organizer.
+Audit log for Megan File Organizer.
 Tracks every file move so actions can be undone.
 """
 

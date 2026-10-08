@@ -1,6 +1,6 @@
-# 🤝 Contributing to Ines
+# 🤝 Contributing to Megan
 
-Welcome to the **Ines** project! First off, thank you for taking the time to contribute. Because Ines is being developed collaboratively by multiple team members across different domains (AI/LLM, Voice, PC Automation, Activation Steering, Frontend React, and Backend FastAPI), following clear, consistent standards will keep everyone productive and prevent conflicts.
+Welcome to the **Megan** project! First off, thank you for taking the time to contribute. Because Megan is being developed collaboratively by multiple team members across different domains (AI/LLM, Voice, PC Automation, Activation Steering, Frontend React, and Backend FastAPI), following clear, consistent standards will keep everyone productive and prevent conflicts.
 
 Please take a few minutes to read this guide before starting on any feature or bug fix.
 
@@ -40,14 +40,14 @@ With 3+ engineers actively contributing to the repository, keep these core rules
 ### 2. Fork and Clone
 If using a shared organization/team repository:
 ```bash
-git clone https://github.com/your-org/ines.git
-cd ines
+git clone https://github.com/your-org/megan.git
+cd megan
 ```
 If using a fork-based workflow:
 ```bash
-git clone https://github.com/<your-username>/ines.git
-cd ines
-git remote add upstream https://github.com/your-org/ines.git
+git clone https://github.com/<your-username>/megan.git
+cd megan
+git remote add upstream https://github.com/your-org/megan.git
 ```
 
 ### 3. Backend Setup (Python)
@@ -193,7 +193,7 @@ git push -u origin feature/your-feature-name
 
 ### TypeScript / React (Frontend)
 - **Components**: Functional components with hooks and TypeScript interfaces.
-- **Styling**: Utility classes with Tailwind CSS following the `ines-*` purple theme palette.
+- **Styling**: Utility classes with Tailwind CSS following the `megan-*` purple theme palette.
 - **State Management**: Zustand stores (`frontend/src/store/`) for shared state.
 - **API calls**: Centralize API calls and WebSocket connections in custom hooks (`useChat`, `useSteering`, `useWebSocket`).
 
@@ -233,4 +233,4 @@ Coordinate breaking interface changes ahead of time in team discussions.
 - **Model weights issue?** Run `python scripts/download_models.py` or verify your Hugging Face token in `.env`.
 - **Frontend proxy issues?** Make sure the FastAPI backend is running on port 8000 while Vite runs on port 5173.
 
-Thank you for contributing to Ines! 🚀
+Thank you for contributing to Megan! 🚀

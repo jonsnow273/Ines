@@ -1,7 +1,7 @@
 # 📂 AI-Powered Local File Organizer
 
 ## Overview
-The Ines File Organizer is an intelligent, privacy-first file taxonomy system. It monitors target directories (such as Downloads, Desktop, Documents) in real-time, categorizes incoming and existing files using extension-based deterministic rules, falls back to a local LLM for ambiguous or unknown extensions, avoids duplicates using SHA-256 hashing, and maintains an undoable JSON audit log.
+The Megan File Organizer is an intelligent, privacy-first file taxonomy system. It monitors target directories (such as Downloads, Desktop, Documents) in real-time, categorizes incoming and existing files using extension-based deterministic rules, falls back to a local LLM for ambiguous or unknown extensions, avoids duplicates using SHA-256 hashing, and maintains an undoable JSON audit log.
 
 ---
 

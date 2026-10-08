@@ -1,5 +1,5 @@
 """
-Automation module — PC action execution for Ines.
+Automation module — PC action execution for Megan.
 
 Provides:
 - WhitelistManager: validates actions against the safety whitelist

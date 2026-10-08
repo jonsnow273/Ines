@@ -1,5 +1,5 @@
 """
-Unit tests for Ines Authentication System.
+Unit tests for Megan Authentication System.
 Tests database initialization, user registration, validation, password hashing,
 token creation/verification, per-user directory creation, and user management.
 """
@@ -166,5 +166,5 @@ class TestAuthSystem(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    print("\nRunning Ines Authentication Unit Tests...\n")
+    print("\nRunning Megan Authentication Unit Tests...\n")
     unittest.main(verbosity=2)

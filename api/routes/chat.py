@@ -1,5 +1,5 @@
 """
-Chat REST API routes for Ines.
+Chat REST API routes for Megan.
 Handles message sending, session management, and conversation history.
 """
 

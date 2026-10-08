@@ -1,0 +1,65 @@
+# ============================================================
+# Megan Digital Memory — Privacy & Capture Configuration
+# ============================================================
+
+capture:
+  # Capture interval in seconds when memory is active
+  interval_seconds: 5
+  
+  # Minimum pixel change required to trigger a capture (0 - 100)
+  # Captures below this difference threshold are discarded to save storage
+  diff_threshold_percent: 5.0
+  
+  # Max image dimension (downscales larger screens, e.g. 4k/1440p down to 1280px width)
+  max_width: 1280
+  
+  # Compressed JPEG quality (1 - 100). 75 yields ~50-80 KB per screenshot
+  jpeg_quality: 75
+  
+  # Days to keep image files on disk. Text & semantic vector indexes are kept permanently.
+  image_retention_days: 30
+
+privacy:
+  # Enabled by default: skips capture if active window matches any rule below
+  enabled: true
+  
+  # Blacklisted executable process names (case-insensitive substring match)
+  blacklisted_processes:
+    - "whatsapp"
+    - "telegram"
+    - "signal"
+    - "discord"
+    - "slack"
+    - "viber"
+    - "element"
+    - "skype"
+    - "bitwarden"
+    - "1password"
+    - "keepass"
+    - "lastpass"
+    - "authy"
+    - "tor"
+
+  # Blacklisted window title keywords (case-insensitive substring match)
+  blacklisted_window_titles:
+    - "whatsapp"
+    - "telegram"
+    - "signal"
+    - "discord"
+    - "messenger"
+    - "incognito"
+    - "inprivate"
+    - "private browsing"
+    - "bitwarden"
+    - "1password"
+    - "keepass"
+    - "lastpass"
+    - "password manager"
+    - "bank"
+    - "online banking"
+    - "checkout"
+    - "credit card"
+    - "cvv"
+    - "paypal"
+    - "login"
+    - "sign in"

@@ -1,5 +1,5 @@
 """
-File Mover for Ines File Organizer.
+File Mover for Megan File Organizer.
 Safely moves files to organized folders with confirmation, dedup, and audit trail.
 """
 

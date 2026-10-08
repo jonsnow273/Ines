@@ -1,5 +1,5 @@
 """
-Multilingual system prompt loader for Ines.
+Multilingual system prompt loader for Megan.
 Reads language-specific YAML prompt files and injects them
 as the system message at the start of each conversation.
 """
@@ -79,7 +79,7 @@ def load_system_prompt(lang_code: str) -> str:
     except Exception as e:
         logger.error(f"Failed to load system prompt for '{lang_code}': {e}")
         return (
-            "You are Ines, a helpful and safety-conscious AI assistant. "
+            "You are Megan, a helpful and safety-conscious AI assistant. "
             "Always confirm before performing irreversible actions."
         )
 

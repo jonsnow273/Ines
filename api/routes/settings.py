@@ -1,5 +1,5 @@
 """
-Settings REST API routes for Ines.
+Settings REST API routes for Megan.
 Read and update application configuration.
 """
 

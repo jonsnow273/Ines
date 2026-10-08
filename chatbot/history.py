@@ -1,5 +1,5 @@
 """
-Conversation history manager for Ines.
+Conversation history manager for Megan.
 Saves and loads message lists as JSON per session.
 """
 

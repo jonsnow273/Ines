@@ -1,4 +1,4 @@
-# 🔬 Activation Steering: Controllable Internal Behavior in Ines
+# 🔬 Activation Steering: Controllable Internal Behavior in Megan
 
 > **Research Question**: *Can an AI assistant's observable behavioral characteristics (e.g., conciseness, caution, verbosity, creative divergence) be systematically steered by intervening in internal residual stream representations during inference—without altering model weights or relying on brittle prompt engineering?*
 
@@ -8,7 +8,7 @@
 
 In contemporary LLM assistants, behavioral modulation is almost exclusively attempted via **prompt engineering** (system prompts, few-shot personas, or appended instructions). While convenient, prompt-based conditioning introduces major operational and scientific shortcomings:
 
-| Failure Mode / Metric | Prompt Engineering | Activation Steering (Ines) |
+| Failure Mode / Metric | Prompt Engineering | Activation Steering (Megan) |
 |---|---|---|
 | **Context Window Overhead** | Consumes valuable context tokens on every request | **Zero token overhead**; intervention occurs inside internal layers |
 | **Robustness & Fragility** | Fragile; instructions fade over long contexts or get overwritten by user input | **Inherent to forward pass**; applied consistently across all token steps |
@@ -16,7 +16,7 @@ In contemporary LLM assistants, behavioral modulation is almost exclusively atte
 | **Granularity & Linearity** | Coarse, categorical, and qualitative (hard to tune continuous intensity) | **Continuous parameter α ∈ [-3.0, +3.0]** allows quantitative calibration |
 | **Mechanistic Explainability** | Black box; hard to verify why a prompt changed behavior | **Directly observable** in layer activation projections and cosine angles |
 
-Ines investigates whether **activation addition (vector steering)** can serve as a robust, computationally lightweight mechanism for personalizing and constraining a local AI assistant.
+Megan investigates whether **activation addition (vector steering)** can serve as a robust, computationally lightweight mechanism for personalizing and constraining a local AI assistant.
 
 ---
 
@@ -30,7 +30,7 @@ $$x_{t}^{(l+1)} = x_{t}^{(l)} + \text{Attn}^{(l)}(x_{t}^{(l)}) + \text{MLP}^{(l)
 The residual stream $x^{(l)} \in \mathbb{R}^{d_{\text{model}}}$ acts as a shared representation highway. Linear representations of concepts, styles, and behavioral tendencies naturally emerge as directions in this high-dimensional vector space.
 
 ### 2.2 Activation Addition (Inference-Time Hook)
-Given a calibrated behavioral steering direction $\vec{v} \in \mathbb{R}^{d_{\text{model}}}$ at target layer $L$, Ines modifies the residual stream during autoregressive decoding:
+Given a calibrated behavioral steering direction $\vec{v} \in \mathbb{R}^{d_{\text{model}}}$ at target layer $L$, Megan modifies the residual stream during autoregressive decoding:
 
 $$\tilde{x}_{t}^{(L)} = x_{t}^{(L)} + \alpha \cdot \vec{v}$$
 
@@ -46,7 +46,7 @@ Because the intervention is linear and additive, it requires zero backward passe
 
 ## 3. Direction Extraction Methodology
 
-Ines derives steering vectors using **Contrastive Activation Differences**:
+Megan derives steering vectors using **Contrastive Activation Differences**:
 
 ```
                   [ Positive Prompt Corpus: Style A ] ──► Forward Pass ──► Activations {h_pos}
@@ -71,7 +71,7 @@ Ines derives steering vectors using **Contrastive Activation Differences**:
 
 ## 4. Calibrated Behavioral Presets
 
-Ines implements 5 calibrated behavioral vectors:
+Megan implements 5 calibrated behavioral vectors:
 
 ### 1. `cautious` (Safety & Risk Scrutiny)
 - **Target Layer**: Residual stream, Layer 16 (Mistral 7B)
@@ -100,7 +100,7 @@ Ines implements 5 calibrated behavioral vectors:
 
 ## 5. Experimental Verification & Side-by-Side Evaluation
 
-To evaluate whether behavioral control is genuine, Ines includes a side-by-side test protocol in the UI:
+To evaluate whether behavioral control is genuine, Megan includes a side-by-side test protocol in the UI:
 
 ### Benchmark Evaluation Sample
 
@@ -113,7 +113,7 @@ To evaluate whether behavioral control is genuine, Ines includes a side-by-side 
 
 ## 6. Evaluation Metrics
 
-Ines defines four quantitative and qualitative metrics for measuring steering fidelity:
+Megan defines four quantitative and qualitative metrics for measuring steering fidelity:
 
 1. **Behavioral Shift Score (Classification Accuracy)**: A secondary classifier scores whether the steered output aligns with the target attribute.
 2. **Length Delta Ratio**: $\Delta L = \frac{\text{Tokens}(\text{steered})}{\text{Tokens}(\text{unsteered})}$.
@@ -130,4 +130,4 @@ In the spirit of rigorous AI research, we document observed constraints:
 
 1. **Over-Steering Saturation (α > 3.0)**: When α is set too high, the intervention overwhelms the residual stream, resulting in repetitive token loops, syntax corruption, or hallucinated punctuation.
 2. **Context Shift Sensitivity**: Vectors extracted from conversational text may exhibit reduced efficacy when applied to code generation tasks.
-3. **Quantization Interaction**: 4-bit quantization (`bitsandbytes`) slightly diminishes steering vector resolution compared to 16-bit float inference. Ines compensates with calibrated scaling factors.
+3. **Quantization Interaction**: 4-bit quantization (`bitsandbytes`) slightly diminishes steering vector resolution compared to 16-bit float inference. Megan compensates with calibrated scaling factors.

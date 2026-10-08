@@ -1,5 +1,5 @@
 """
-Confirmation prompt flow for Ines automation.
+Confirmation prompt flow for Megan automation.
 Ensures destructive or sensitive actions require explicit user consent
 before execution.
 """
@@ -31,7 +31,7 @@ class ConfirmationManager:
         if not self.require_confirmation:
             return True
 
-        print(f"\n⚠️  Ines wants to perform a potentially destructive action:")
+        print(f"\n⚠️  Megan wants to perform a potentially destructive action:")
         print(f"   {action_description}")
         print()
 
@@ -54,7 +54,7 @@ class ConfirmationManager:
         The frontend renders a confirmation dialog and sends back the decision.
 
         Args:
-            action_description: What Ines wants to do.
+            action_description: What Megan wants to do.
 
         Returns:
             Dict with confirmation_required=True and the description.
@@ -62,5 +62,5 @@ class ConfirmationManager:
         return {
             "confirmation_required": True,
             "action_description": action_description,
-            "message": f"Ines wants to: {action_description}. Allow?",
+            "message": f"Megan wants to: {action_description}. Allow?",
         }

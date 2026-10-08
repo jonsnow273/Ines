@@ -1,5 +1,5 @@
 """
-Application-wide constants, file path resolutions, and default values for Ines.
+Application-wide constants, file path resolutions, and default values for Megan.
 """
 
 import os
@@ -25,7 +25,7 @@ USERS_DIR = DATA_DIR / "users"
 MEMORY_DIR = DATA_DIR / "memory"
 
 # Default Configuration Filepaths
-SETTINGS_CONFIG_PATH = CONFIGS_DIR / "ines_settings.yaml"
+SETTINGS_CONFIG_PATH = CONFIGS_DIR / "megan_settings.yaml"
 MODEL_CONFIG_PATH = CONFIGS_DIR / "model_config.yaml"
 WHITELIST_CONFIG_PATH = CONFIGS_DIR / "automation_whitelist.yaml"
 LANGUAGES_CONFIG_PATH = CONFIGS_DIR / "languages.yaml"

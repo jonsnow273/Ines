@@ -1,5 +1,5 @@
 """
-Core foundation module for Ines.
+Core foundation module for Megan.
 Provides centralized constants, logger, and configuration instances.
 """
 

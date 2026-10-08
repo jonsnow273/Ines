@@ -17,7 +17,7 @@ export function MessageBubble({ message }: Props) {
         }`}
       >
         {!isUser && (
-          <div className="text-xs text-indigo-400 font-semibold mb-1">Ines</div>
+          <div className="text-xs text-indigo-400 font-semibold mb-1">Megan</div>
         )}
         <div className="whitespace-pre-wrap">{message.content}</div>
       </div>

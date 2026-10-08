@@ -1,5 +1,5 @@
 """
-Voice REST API routes for Ines.
+Voice REST API routes for Megan.
 Provides voice pipeline status and configuration.
 """
 
