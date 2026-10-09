@@ -8,9 +8,17 @@
 
 > **"Can an AI assistant's observable behavior be systematically controlled by modifying internal model activations rather than engineering system prompts?"**
 
-**Megan** is an experimental, privacy-first local AI assistant that explores controlling an LLM's observable behavior through **activation-level interventions** during the forward pass. While conventional assistants rely entirely on prompt engineering to tweak their tone and behavior, Megan demonstrates how the exact same model weights and the exact same user prompt can yield radically different behavioral characteristics—such as **concise**, **cautious**, **detailed**, or **creative** responses—by directly steering internal residual stream representations.
+**Megan** is an experimental, privacy-first local AI desktop assistant. Unlike conventional AI assistants that rely solely on surface-level prompt engineering (*"You are a concise assistant"*), Megan demonstrates how the exact same model weights and the exact same user prompt can yield fundamentally distinct behavioral traits—such as **concise**, **cautious**, **detailed**, or **creative** responses—by directly steering internal residual stream representations during the forward pass.
 
-Alongside this mechanistic research core, Megan remains a fully functional, user-friendly personal desktop assistant featuring **local multilingual voice interaction**, **safe whitelisted PC automation**, **AI-powered file organization**, **on-device digital memory with OCR & vector search**, and a **modern React + Tailwind dashboard** — all running 100% locally with no cloud dependencies.
+Alongside this mechanistic interpretability research core, Megan features an integrated **Smart Workspace Suite**:
+- **🛡️ Safe Desktop Automation** (Sandboxed whitelist execution with confirmation gates & Recycle Bin protection)
+- **📂 AI-Powered File Organizer** (Deterministic rules + LLM fallback + SHA-256 deduplication + audit log with undo)
+- **🧠 Digital Screen Memory** (Smart change-detected screen capture + Tesseract OCR + ChromaDB semantic search)
+- **🎯 Focus & Anti-Distraction Coach** (Active window tracking + distraction alerts + workspace auto-restoration)
+- **🕒 Visual Time Machine Slider** (Interactive timeline scrubber across past screen history)
+- **📊 Automated Daily Standup Reports** (Automatic synthesis of git commits, focus hours, and screen topics)
+- **⚡ Autonomous Workflow Macro Recorder** (Natural-language routine recording & safe replay)
+- **🔐 Multi-User Account Isolation** (Cryptographic PBKDF2-HMAC-SHA256 authentication with isolated workspaces)
 
 ---
 
@@ -18,7 +26,7 @@ Alongside this mechanistic research core, Megan remains a fully functional, user
 
 ### The Core Innovation: Activation Steering vs. Prompt Engineering
 
-Most modern AI assistants modify behavior by altering instructions in token space (e.g., adding *"You are a concise assistant"* to the prompt). While intuitive, prompt-based conditioning is fundamentally constrained: it consumes valuable context tokens, can be overridden by user prompt injections, and lacks continuous calibration.
+Most modern AI assistants modify behavior by altering instructions in token space. While intuitive, prompt-based conditioning is fundamentally constrained: it consumes valuable context tokens, can be bypassed by prompt injections, and lacks continuous calibration.
 
 Megan intervenes at the **representation level**:
 
@@ -55,7 +63,7 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 
 ---
 
-## 🎛️ System Capabilities & Feature Hierarchy
+## 🎛️ Complete System Capabilities & Features
 
 ### 1. 🔬 Activation Steering Lab (Primary Research Core)
 - **Mechanistic Hooks**: Integrates **TransformerLens** to intercept and patch residual stream states (`hook_resid_post`) during inference.
@@ -65,14 +73,14 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 - **Vector Math**: Extract new behavioral directions from contrastive prompt pairs using mean-difference and PCA pipelines.
 
 ### 2. 💬 Local Conversational Core
-- 100% private, on-device text generation powered by open-weight models (**Mistral 7B Instruct** or **Gemma-2-2B**).
-- 4-bit / 8-bit quantization support via `bitsandbytes` to run smoothly on consumer GPUs (4-8 GB VRAM) or CPU.
+- 100% private, on-device text generation powered by open-weight models (**Mistral 7B Instruct**, **Gemma-2-2B**, or lightweight **Qwen2.5-0.5B**).
+- 4-bit / 8-bit quantization support via `bitsandbytes` to run smoothly on consumer GPUs (4-8 GB VRAM) or CPU fallback.
 - Multi-turn conversation persistence with structured session logging.
 
 ### 3. 🛡️ Safe PC Automation Agent
 - Translates natural language requests into structured, whitelisted desktop actions.
 - **Strict Whitelist**: Can only execute safe actions listed in `configs/automation_whitelist.yaml`.
-- **Mandatory Confirmation Gate**: Destructive actions (deleting files, overwriting directories) explicitly trigger a visual confirmation prompt before execution.
+- **Mandatory Confirmation Gate**: Destructive actions explicitly trigger a visual confirmation modal before execution.
 - **Recycle Bin Protection**: Employs `send2trash` to prevent irreversible file destruction.
 - **Whitelisted Handlers**: File management, application launching, system search, audio playback, and VS Code code generation.
 
@@ -83,88 +91,172 @@ Using the built-in **Steering Comparison Lab**, users and researchers can run id
 - Transcribed speech streams directly into the same intent and steering pipeline as typed input.
 
 ### 5. 📂 AI-Powered File Organizer
-- **Intelligent categorization** of files using extension-based rules with LLM fallback for ambiguous types.
-- **Taxonomy-driven folder structure**: Documents, Images, Videos, Audio, Code, Archives, and more — auto-created under the user's target directory.
-- **LLM-powered classification**: When a file can't be categorized by extension alone, the local LLM analyzes file metadata (name, size, type) to pick the best category.
-- **Duplicate detection**: SHA-256 hashing prevents duplicate files from cluttering organized folders.
-- **Real-time folder watcher**: Uses `watchdog` to monitor directories and auto-organize new files as they arrive.
-- **Full audit trail**: Every move is logged to a JSON audit file with undo support — any organized file can be restored to its original location.
-- **Dry-run mode**: Preview what the organizer would do without actually moving any files.
-- **CLI integration**: `--organize`, `--dry-run`, and `--watch` flags for terminal usage.
-- **REST API**: Endpoints at `/api/organizer/` for scan, start, stop, undo, and audit retrieval.
+- **Intelligent categorization**: Taxonomy-driven classification (Documents, Images, Videos, Audio, Code, Archives, Installers).
+- **Two-tier sorting**: Instant extension matching with local LLM fallback for ambiguous or unknown files.
+- **Duplicate suppression**: SHA-256 content hashing prevents redundant duplicates from cluttering folders.
+- **Real-time folder watcher**: Uses `watchdog` to monitor target folders (Downloads, Desktop) and auto-organize incoming files.
+- **Audit trail & Safe Undo**: Complete JSON history of all operations with instant one-click restoration.
+- **CLI & REST API**: `--organize`, `--dry-run`, and `/api/organizer/*` endpoints.
 
-### 6. 🧠 Digital Memory *(Coming Soon)*
-A privacy-first, on-device screen memory system that captures, indexes, and makes searchable everything the user sees on their screen.
-- **Smart screenshot capture**: Background process captures the screen only when content **changes significantly** (pixel-diff threshold), avoiding redundant storage.
-- **OCR text extraction**: Each screenshot is processed through **Tesseract OCR** (`pytesseract`) to extract searchable text — every word on your screen becomes searchable.
-- **Optional image captioning**: A local vision-language model (e.g., LLaVA) generates short natural-language descriptions for screenshots with primarily visual content (diagrams, charts, UI).
-- **Vector embedding & search**: Extracted text is embedded via **Sentence-Transformers** (`all-MiniLM-L6-v2`) and stored in a local **ChromaDB** vector database, enabling natural-language similarity search.
-- **Privacy controls**: Configurable blacklist to exclude sensitive windows (incognito browsers, banking apps, password managers) from capture.
-- **Auto-cleanup & retention**: Old screenshots are automatically purged after a configurable retention period (default 30 days) while OCR text and embeddings are retained indefinitely.
-- **Storage-efficient**: Compressed JPEG capture (~50-100 KB each) with smart deduplication caps storage at approximately **~2 GB/month**.
-- **100% local & free**: Tesseract, Sentence-Transformers, and ChromaDB are all open-source. No cloud APIs, no subscriptions, no data leaves the device.
+### 6. 🧠 Digital Screen Memory (Visual Semantic Recall)
+- **Smart Change-Detection Capture**: Captures screen snapshots periodically, using a perceptual pixel-diff threshold (>5%) to discard idle or static screens—saving up to 90% disk space.
+- **Automated Privacy Blacklist**: Foreground process and window title inspection instantly drops private chat apps (WhatsApp, Telegram, Discord, Signal) and sensitive windows (banking, incognito, password managers) directly in RAM.
+- **Tesseract OCR Extraction**: Reads all visible text from captured screens (terminal outputs, code snippets, documentation, slides).
+- **ChromaDB Vector Retrieval**: Embeds text using Sentence-Transformers (`all-MiniLM-L6-v2`) for natural language semantic search (*"What was that Docker command I ran yesterday?"*).
+- **Auto-Retention Policy**: Prunes raw JPEG images after 30 days while retaining searchable OCR text and embeddings indefinitely.
 
-### 7. 🔐 User Account System *(Coming Soon)*
-- **Local authentication** with username + bcrypt-hashed password stored in SQLite.
-- **Per-user data isolation**: Each user gets their own private memory silo, organizer settings, conversation history, and steering preferences.
-- **Session persistence**: Close and reopen the app — log back in and all your data (Digital Memory, organized files, chat history) is exactly where you left it.
-- **Multi-user support**: Multiple people sharing the same PC each get their own private, sandboxed workspace.
+### 7. 🎯 Focus & Anti-Distraction Autonomous Coach
+- **Active Window Tracking**: Monitors active foreground applications and categorized URLs during active focus sessions.
+- **Distraction Nudge**: If the user wanders into entertainment or messaging apps for over 2 minutes, Megan fires a friendly notification.
+- **One-Click Workspace Restoration**: With user confirmation, Megan automatically minimizes distracting windows and restores the target IDE or terminal.
+- **Focus Analytics**: Generates productive vs. distracted duration metrics viewable in the React dashboard.
+
+### 8. 🕒 Visual Time Machine Slider
+- **Interactive Temporal Scrubber**: A horizontal timeline slider in the dashboard allowing the user to scrub back to any point in their workday.
+- **Snapshot Filmstrip**: Displays the exact visual screen frame captured at that minute alongside active window metadata.
+- **One-Click OCR Copy**: Click any text block inside a past screen snapshot to copy terminal logs or code directly to the clipboard.
+
+### 9. 📊 Automated Daily Standup & Activity Report Generator
+- **Multi-Source Synthesis**: Combines active focus hours, Git commits made today, and Digital Memory screen topics.
+- **LLM Standup Drafts**: Generates concise, professional Markdown/PDF reports detailing deep work hours, key accomplishments, and modified files.
+
+### 10. ⚡ Autonomous Workflow Macro Recorder
+- **Conversational Macro Recording**: Record repetitive multi-step desktop sequences (*"Record Macro: 'Setup Dev Environment'"*).
+- **Safe Replay**: Stores recipes as structured JSON steps and replays them on command via Megan's whitelisted OS automation.
+
+### 11. 🔐 User Account System & Data Isolation
+- **Cryptographic Local Auth**: PBKDF2-HMAC-SHA256 password hashing (100k rounds + salt) and URL-safe signed HMAC-SHA256 session tokens.
+- **Isolated Workspaces**: Each registered user account gets a private silo (`data/users/<username>/`) containing separate memory, organizer settings, and chat history.
+- **Session Persistence & Multi-User Support**: Multiple users sharing a single machine maintain independent databases and privacy boundaries.
 
 ---
 
 ## 🏛️ System Architecture
 
 ```
-                                  [ User Touchpoints ]
-                    Voice ("Hey Megan")  │  Web Dashboard  │  CLI
-                                           ▼
-                                  ┌─── [ Auth Gate ] ───┐
-                                  │  (Login / Session)   │
-                                  └────────┬─────────────┘
-                                           ▼
-                                  [ FastAPI Gateway ]
-                                           │
-       ┌──────────────┬────────────────────┼────────────────────┬──────────────────┐
-       ▼              ▼                    ▼                    ▼                  ▼
-[ Intent          [ Activation       [ File Organizer ]  [ Digital Memory ]  [ Account
-  Classifier ]      Steering Lab ]         │                    │              System ]
-       │              │              ┌─────┴─────┐        ┌────┴─────┐          │
-       ├─► Chat       │              ▼           ▼        ▼          ▼        users.db
-       │              │         [ Rules +    [ Folder   [ Screen   [ Vector    (SQLite)
-       └─► Automation │          LLM Classify] Watcher]  Capture ]  Store ]
-              │       │              │           │        │          │
-     [ Whitelist ]    │              ▼           │     [ OCR ]    [ ChromaDB ]
-              │       │         [ Audit +   ◄────┘   (Tesseract)     ▲
-     [ Confirm ]      │          Undo ]                   │          │
-              │       │                              [ Embeddings ]──┘
-     [ OS Handlers ]  │                         (Sentence-Transformers)
-                      │
-               [ TransformerLens ]
+                                      [ User Touchpoints ]
+                    Voice ("Hey Megan")  │  Web Dashboard (React)  │  Terminal CLI
+                                                ▼
+                                      ┌─── [ Auth Gate ] ───┐
+                                      │  (Login / Session)   │
+                                      └─────────┬───────────┘
+                                                ▼
+                                      [ FastAPI Gateway ]
+                                                │
+       ┌──────────────┬────────────────────┬────┴───────────────┬────────────────────┬──────────────────┐
+       ▼              ▼                    ▼                    ▼                    ▼                  ▼
+[ Intent          [ Activation       [ File Organizer ]  [ Digital Memory ]   [ Focus & Macro   [ User Account
+  Classifier ]      Steering Lab ]         │                    │               Engine ]          System ]
+       │              │              ┌─────┴─────┐        ┌────┴─────┐          │                  │
+       ├─► Chat       │              ▼           ▼        ▼          ▼     [ Focus Tracker ]    users.db
+       │              │         [ Rules +    [ Folder   [ Screen   [ Vector     │               (SQLite)
+       └─► Automation │          LLM Classify] Watcher]  Capture ]  Store ]   [ Macro Replay ]     │
+              │       │              │           │        │          │          │           data/users/
+     [ Whitelist ]    │              ▼           │     [ OCR ]    [ ChromaDB ]  │           <username>/
+              │       │         [ Audit +   ◄────┘   (Tesseract)     ▲          ▼               │
+     [ Confirm ]      │          Undo ]                   │          │    [ OS Handlers ]  {memory, reports,
+              │       │                              [ Embeddings ]──┘          ▲           settings}
+     [ OS Handlers ]  │                         (Sentence-Transformers)         │
+                      │                                                         │
+               [ TransformerLens ] ─────────────────────────────────────────────┘
               x' = x + α · v_direction
                       │
-               [ Local LLM ]
-              (Mistral / Gemma)
+               [ Local LLM Core ]
+           (Mistral / Gemma / Qwen)
 ```
 
 ---
 
 ## 🛠️ Technology & Model Stack
 
-| Domain | Tool / Model | Rationale & Role |
+| Domain | Tool / Library | Role & Rationale |
 |---|---|---|
-| **Intervention Core** | **TransformerLens** | Standard library for mechanistic interpretability and forward hooks |
-| **Primary LLM** | **Mistral 7B Instruct v0.3** | High-performance open-weight model with rich residual representation |
-| **Lightweight LLM** | **Gemma-2-2B-IT** | Compact alternative optimal for low-VRAM machines (4 GB) |
-| **Speech Recognition** | **OpenAI Whisper** | State-of-the-art local multilingual speech-to-text |
-| **Wake Word Detection** | **openWakeWord** | Lightweight on-device ONNX wake word classifier |
-| **Backend Gateway** | **FastAPI + WebSockets** | Asynchronous streaming API for tokens and real-time audio |
-| **Frontend UI** | **React 18 + Vite + Tailwind** | Modern dark-themed dashboard with Recharts & Radix UI |
-| **OS Automation** | **Custom Sandboxed Handlers** | Safe execution boundary with explicit whitelists and Recycle Bin guards |
-| **File Organizer** | **watchdog + SHA-256** | Real-time folder monitoring with duplicate detection and LLM-based classification |
-| **OCR Engine** | **Tesseract + pytesseract** | Open-source optical character recognition for screenshot text extraction |
-| **Vector Embeddings** | **Sentence-Transformers** (`all-MiniLM-L6-v2`) | Lightweight local text embeddings for similarity search |
-| **Vector Store** | **ChromaDB** | Persistent on-disk vector database for Digital Memory retrieval |
-| **User Auth** | **SQLite + bcrypt** | Lightweight local user authentication with secure password hashing |
+| **Intervention Core** | **TransformerLens** | Standard library for mechanistic interpretability and forward residual stream hooks |
+| **Language Models** | **Mistral 7B / Gemma 2B / Qwen 0.5B** | Open-weight instruction models with quantization support (FP16 / 4-bit) |
+| **Speech Recognition** | **OpenAI Whisper** | Local multilingual speech-to-text with automatic language detection |
+| **Wake Word Detection** | **openWakeWord** | Ultra-lightweight on-device ONNX wake word engine ("Hey Megan") |
+| **Backend Gateway** | **FastAPI + WebSockets** | High-performance asynchronous REST and streaming token WebSocket server |
+| **Frontend UI** | **React 18 + Vite + Tailwind** | Modern dark-themed dashboard with Recharts, Radix UI, and Lucide icons |
+| **Desktop Automation** | **Custom Sandboxed Handlers** | Safe execution boundary with explicit whitelists and `send2trash` Recycle Bin guards |
+| **File Taxonomy** | **watchdog + SHA-256** | Real-time filesystem observer with duplicate suppression and undoable JSON audit |
+| **Screen OCR** | **Tesseract + pytesseract** | Optical character recognition discovering on-screen code, logs, and text |
+| **Semantic Vectors** | **Sentence-Transformers + ChromaDB** | 384-dimensional dense embeddings (`all-MiniLM-L6-v2`) with persistent vector storage |
+| **Process Tracking** | **psutil + Windows WinAPI** | Zero-overhead foreground window title and active process monitoring |
+| **Authentication** | **SQLite + PBKDF2-HMAC-SHA256** | Local cryptographic user authentication with sandboxed per-user storage silos |
+
+---
+
+## 📂 Repository Structure
+
+```
+MeganAI/
+├── api/                     # FastAPI backend
+│   ├── middleware/          # CORS & global error handlers
+│   ├── routes/              # REST endpoints (auth, chat, steering, organizer, memory, automation)
+│   ├── schemas/             # Pydantic request/response schemas
+│   ├── websocket/           # Streaming chat and audio WebSocket endpoints
+│   └── server.py            # Application factory and startup orchestration
+├── auth/                    # Cryptographic authentication & user workspace isolation
+│   ├── database.py          # SQLite database connection & per-user directory initialization
+│   ├── middleware.py        # FastAPI Bearer token dependencies (get_current_user, require_auth)
+│   ├── models.py            # User validation models
+│   └── service.py           # PBKDF2 hashing, signed session tokens, user management
+├── automation/              # Safe PC automation subsystem
+│   ├── action_handler.py    # Whitelisted OS execution engine
+│   ├── confirmation.py      # User confirmation gatekeeper
+│   └── whitelist.py         # Whitelist schema & validator
+├── chatbot/                 # Multi-turn conversation management
+│   ├── context_manager.py   # Context token trimming & sliding window
+│   ├── history.py           # Session conversation history tracking
+│   └── language_manager.py  # Multilingual system prompt injection
+├── configs/                 # Declarative YAML configurations
+│   ├── automation_whitelist.yaml # Whitelisted executable operations
+│   ├── languages.yaml       # Supported multilingual definitions
+│   ├── megan_settings.yaml  # Global runtime settings
+│   ├── memory_privacy.yaml  # Blacklisted processes and window keywords
+│   └── model_config.yaml    # Model paths, devices, and quantization parameters
+├── core/                    # Application foundation
+│   ├── config.py            # Settings loader
+│   ├── constants.py         # Global directory constants & paths
+│   └── logger.py            # Structured logging
+├── data/                    # Local runtime storage (git-ignored)
+│   ├── users/               # Per-user isolated storage silos
+│   │   └── <username>/      # {memory, organizer, reports, conversations, settings}
+│   ├── users.db             # Local user accounts database
+│   └── memory/              # Global memory fallback directory
+├── docs/                    # In-depth architectural & setup guides
+├── frontend/                # React 18 + Vite + Tailwind CSS dashboard
+│   ├── src/components/      # UI components (Chat, Steering, Layout, Modals)
+│   └── package.json         # Frontend dependencies
+├── llm/                     # Local model inference pipeline
+│   ├── loader.py            # HuggingFace model & tokenizer loading with quantization
+│   ├── inference.py         # Generation engine with parameter tuning
+│   └── tokenizer_wrapper.py # Unified tokenization interface
+├── memory/                  # Digital Screen Memory subsystem
+│   ├── capture.py           # Smart change-detected screen capture & JPEG compression
+│   ├── privacy.py           # Foreground window & process blacklist inspector
+│   ├── ocr.py               # Tesseract OCR wrapper & text cleaner
+│   ├── store.py             # ChromaDB vector store & retention pruner
+│   └── service.py           # Background memory daemon & semantic search coordinator
+├── organizer/               # AI-powered file organizer subsystem
+│   ├── audit.py             # JSON move audit trail with multi-step undo
+│   ├── classifier.py        # Two-tier classifier (deterministic rules + LLM fallback)
+│   ├── mover.py             # Safe mover with SHA-256 duplicate suppression
+│   ├── rules.py             # Taxonomy mappings and extension blacklists
+│   └── watcher.py           # Real-time watchdog directory observer
+├── steering/                # Mechanistic activation steering subsystem
+│   ├── hook_manager.py      # TransformerLens residual stream hook manager
+│   ├── presets.py           # Calibrated steering vectors (cautious, concise, creative)
+│   └── steering_engine.py   # Steering calibration and comparison engine
+├── voice/                   # Speech recognition & wake word pipeline
+│   ├── pipeline.py          # Real-time microphone audio processing
+│   ├── recorder.py          # Audio buffer manager
+│   └── transcriber.py       # OpenAI Whisper wrapper
+├── main.py                  # Main terminal CLI entry point
+├── test_auth.py             # Authentication unit test suite
+├── test_memory.py           # Digital Memory unit test suite
+└── requirements.txt         # Production dependencies
+```
 
 ---
 
@@ -174,12 +266,12 @@ A privacy-first, on-device screen memory system that captures, indexes, and make
 - **Python**: 3.10 or 3.11
 - **Node.js**: 18+ and `npm`
 - **Memory**: 8 GB RAM minimum (16 GB recommended)
-- **GPU (Optional)**: 6+ GB NVIDIA VRAM for optimal inference speeds (CPU mode supported)
+- **Tesseract OCR (Optional)**: [Tesseract installer for Windows](https://github.com/UB-Mannheim/tesseract/wiki) for screen text extraction.
 
-### 1. Repository Setup
+### 1. Setup Environment
 ```bash
-git clone https://github.com/your-org/megan.git
-cd megan
+git clone https://github.com/jonsnow273/MeganAI.git
+cd MeganAI
 
 # Setup Python virtual environment
 python -m venv venv
@@ -191,7 +283,6 @@ pip install -r requirements-dev.txt
 
 # Configure environment
 copy .env.example .env           # Windows
-# cp .env.example .env           # Linux/macOS
 ```
 
 ### 2. Frontend Setup
@@ -201,13 +292,7 @@ npm install
 cd ..
 ```
 
-### 3. Model Acquisition
-```bash
-python scripts/download_models.py
-python scripts/setup_wake_word.py
-```
-
-### 4. Running the System
+### 3. Running the System
 ```bash
 # Terminal 1: Launch FastAPI Backend Server
 python -m uvicorn api.server:app --reload --port 8000
@@ -216,9 +301,57 @@ python -m uvicorn api.server:app --reload --port 8000
 cd frontend
 npm run dev
 ```
-Navigate to **`http://localhost:5173`** to access both the conversational assistant and the Activation Steering Lab.
+Navigate to **`http://localhost:5173`** to access the Megan dashboard.
 
-*(For terminal-only interaction, run `python main.py --cli`)*
+---
+
+## 💻 CLI Commands Quick Reference
+
+```bash
+# View active system info & steering configuration
+python main.py --info
+
+# Register a new local user account
+python main.py --register
+
+# List registered local accounts
+python main.py --list-users
+
+# File Organizer: preview simulation without moving files
+python main.py --organize --dry-run
+
+# File Organizer: execute organization immediately
+python main.py --organize
+
+# File Organizer: start background folder observer daemon
+python main.py --watch
+
+# Digital Memory: capture active screen immediately
+python main.py --memory-capture
+
+# Digital Memory: search indexed screen history via query
+python main.py --memory-search "FastAPI deployment"
+
+# Digital Memory: start background capture worker
+python main.py --memory-start
+
+# Interactive Chat with custom steering preset
+python main.py --steer cautious --strength 2.0
+```
+
+---
+
+## 🧪 Testing & Validation
+
+The codebase includes comprehensive unit test suites ensuring stability and security:
+
+```bash
+# Run User Authentication & Data Isolation Tests
+python test_auth.py
+
+# Run Digital Memory & Privacy Guard Tests
+python test_memory.py
+```
 
 ---
 
@@ -236,22 +369,6 @@ Navigate to **`http://localhost:5173`** to access both the conversational assist
 - [🤝 Contribution Guide & PR Workflow](CONTRIBUTING.md)
 - [🗺️ Project Roadmap](ROADMAP.md)
 - [🔒 Security Policy](SECURITY.md)
-
----
-
-## 🤝 Team Contribution & Research Collaboration
-
-Megan is actively developed as a modular research project. We follow structured peer reviews and strict branch naming conventions. Please review [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting pull requests.
-
----
-
-## ⚖️ Scientific Rigor & Limitations
-Megan is an experimental system. We explicitly acknowledge observed research limitations:
-1. **Saturation Limits**: Steering values |α| > 2.8 can degrade grammar or trigger token repetition.
-2. **Quantization Effects**: 4-bit quantization slightly degrades steering vector resolution relative to FP16.
-3. **Task Generalization**: Vectors derived from conversational corpora may show reduced efficacy on specialized syntax tasks (e.g., deep code compilation).
-
-See [`docs/experiments.md`](docs/experiments.md) for full evaluation metrics and failure mode analyses.
 
 ---
 
