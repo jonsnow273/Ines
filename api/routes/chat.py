@@ -31,9 +31,6 @@ async def send_message(req: ChatMessageRequest):
     """Send a message and get a response."""
     from chatbot import new_session, resume_session, load_system_prompt
 
-    if _engine is None:
-        raise HTTPException(status_code=503, detail="Model not loaded yet.")
-
     # Get or create session
     session_id = req.session_id
     if session_id and session_id in _sessions:
@@ -61,7 +58,22 @@ async def send_message(req: ChatMessageRequest):
         messages = _context_manager.trim(messages)
 
     # Generate response
-    response_text = _engine.generate(messages)
+    if _engine is not None:
+        response_text = _engine.generate(messages)
+    else:
+        # Development / Degraded Fallback Mode
+        active_preset = "neutral"
+        if _steering_engine and _steering_engine.status.get("active"):
+            active_preset = _steering_engine.status.get("preset", "neutral")
+        
+        user_msg = req.message.lower()
+        if "hello" in user_msg or "hi" in user_msg or "hey" in user_msg:
+            response_text = f"Hello! I am Megan, your local AI assistant with controllable internal behavior. (Running in local preview mode - Steering preset: {active_preset}). How can I help you today?"
+        elif "help" in user_msg:
+            response_text = "I can assist you with local file organization, activation steering behavior experiments, digital screen memory recall, and whitelisted system automation!"
+        else:
+            response_text = f"I received your message: \"{req.message}\". Megan's local engine is running in preview mode with active steering preset '{active_preset}'."
+
     history.add("assistant", response_text)
 
     # Get steering status
