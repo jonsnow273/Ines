@@ -1,0 +1,77 @@
+# ============================================================
+# Megan Focus & Anti-Distraction Coach Configuration
+# ============================================================
+
+focus:
+  # Check interval in seconds
+  poll_interval_seconds: 2
+
+  # Maximum continuous seconds on distracting apps before warning nudge fires
+  max_distraction_seconds: 120
+
+  # Auto restore: if true and user confirms, bring target work window back to front
+  auto_restore_target: true
+
+  # Default target work app process name
+  default_target_app: "code"
+
+# Categorization rules for process names & window title keywords (case-insensitive)
+categories:
+  productive:
+    processes:
+      - "code"            # VS Code
+      - "devenv"          # Visual Studio
+      - "pycharm"         # PyCharm
+      - "idea"            # IntelliJ
+      - "sublime_text"    # Sublime Text
+      - "windowsterminal" # Windows Terminal
+      - "powershell"      # PowerShell
+      - "cmd"             # Command Prompt
+      - "git"             # Git
+      - "postman"         # Postman
+      - "docker"          # Docker Desktop
+      - "notepad++"       # Notepad++
+    window_titles:
+      - "visual studio code"
+      - "github"
+      - "gitlab"
+      - "stackoverflow"
+      - "stack overflow"
+      - "leetcode"
+      - "documentation"
+      - "arxiv"
+      - "terminal"
+      - "powershell"
+
+  distracting:
+    processes:
+      - "spotify"
+      - "discord"
+      - "steam"
+      - "epicgames"
+      - "telegram"
+      - "whatsapp"
+      - "vlc"
+    window_titles:
+      - "youtube"
+      - "instagram"
+      - "reddit"
+      - "twitter"
+      - "x.com"
+      - "netflix"
+      - "twitch"
+      - "facebook"
+      - "tiktok"
+      - "reels"
+      - "shorts"
+
+  neutral:
+    processes:
+      - "explorer"
+      - "searchhost"
+      - "taskmgr"
+      - "settings"
+    window_titles:
+      - "file explorer"
+      - "task manager"
+      - "settings"

@@ -220,12 +220,49 @@ def main():
     parser.add_argument("--memory-start", action="store_true", help="Start the Digital Memory screen capture daemon")
     parser.add_argument("--memory-capture", action="store_true", help="Capture and index the screen immediately")
     parser.add_argument("--memory-search", type=str, default=None, help="Search indexed digital memory via query")
+    parser.add_argument("--focus", type=str, default=None, help="Start a focused work session with distraction coach (e.g. --focus 'Coding')")
+    parser.add_argument("--focus-duration", type=int, default=45, help="Focus session duration in minutes (default: 45)")
 
     args = parser.parse_args()
 
     if args.info:
         print_system_info()
         return
+
+    if args.focus:
+        import time
+        from focus import FocusCoach
+        print(BANNER)
+        print(f"🎯 Starting Focus Session: '{args.focus}' for {args.focus_duration} minutes...")
+        coach = FocusCoach()
+        
+        def on_nudge(alert):
+            print(f"\n⚠️  [FOCUS ALERT] {alert['message']}")
+            print(f"    Suggested Action: Bring your code editor back to focus!\n")
+            
+        coach.add_listener(on_nudge)
+        coach.start_session(goal=args.focus, duration_minutes=args.focus_duration)
+        print("Megan is actively guarding your session against distractions.")
+        print("Press Ctrl+C to finish session.\n")
+        try:
+            while True:
+                summary = coach.tracker.get_summary()
+                status_line = (
+                    f"\r⏱️  Elapsed: {int(summary['elapsed_seconds'])}s | "
+                    f"Productive: {summary['productivity_score']}% | "
+                    f"Current App: {summary['current_process']} [{summary['current_category']}] "
+                )
+                print(status_line, end="", flush=True)
+                time.sleep(1)
+        except KeyboardInterrupt:
+            res = coach.stop_session()
+            print(f"\n\n--- 🏁 Focus Session Completed ---")
+            print(f"Goal               : {res.get('session_goal')}")
+            print(f"Total Productive   : {res.get('time_productive_seconds')}s")
+            print(f"Total Distracted   : {res.get('time_distracted_seconds')}s")
+            print(f"Productivity Score : {res.get('productivity_score')}%")
+            print(f"Nudges Fired       : {res.get('total_nudges_fired')}")
+            return
 
     if args.register:
         from auth import init_db, AuthService, UserCreate
